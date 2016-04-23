@@ -1,0 +1,27 @@
+23/04/2016 VALENTIN
+===================
+
+Plateau : -remplace les 2 attributs joueur1 et joueur2 par un tableau de Joueur de taille 2 ==> permet de manipuler plus simplement les joueurs.
+	  -ajout d'un attribut int joueurCourant afin de savoir quel joueur joue.
+	  -ajout methode void nouvellePartie(String fileName) cf doc
+	  -ajout d'un affichage sommaire pour debug (toString)
+	  -ajout d'une main pour debug
+	  -ajout methode initPlateau
+	  -fix bloquerCases()
+
+Bushi : -asaute(Bushi, Pateau, Joueur) remplacé par aSaute(Bushi,Plateau).
+	-aSaute fix de la recherche du Bushi a chercher
+	-ajout d'un affichage sommaire pour debug (toString)
+
+
+Singe : -Ajout d'un constructeur public Singe(int abs, int ord)
+	-ajout d'un affichage sommaire pour debug (toString)
+
+Lion : -Ajout d'un constructeur public Lion(int abs, int ord)
+       -ajout d'un affichage sommaire pour debug (toString)
+
+Dragon : -Ajout d'un constructeur public Dragon(int abs, int ord)
+	 -ajout d'un affichage sommaire pour debug (toString)
+
+Portail : -Ajout d'un constructeur public Portail(int abs, int ord)
+	  -ajout d'un affichage sommaire pour debug (toString)            
