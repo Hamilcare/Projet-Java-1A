@@ -1,15 +1,15 @@
 public class Dragon extends Bushi implements Deplacable {
 
-      public Dragon(int abs, int ord) {
-            super(abs, ord, 3, 0);
-      }
+	public Dragon(int abs, int ord) {
+		super(abs, ord, 3, 0);
+	}
 
-      @Override
-      public String toString() {
+	@Override
+	public String toString() {
 
-            return "d";
+		return "d " + this.abs + " " + this.ord;
 
-      }
+	}
 }
 
 /*
@@ -43,11 +43,11 @@ public class Dragon extends Bushi implements Deplacable {
  * 
  * for(j=this.getOrd()-1; j<=this.getOrd()+1; j++){
  * if(p.plateau[i][j].isOccupee()){ inter.add(p.plateau[i][j]); } } } return
- * inter; } //public Bushi demanderDéplacement(Plateau p);
+ * inter; } //public Bushi demanderDï¿½placement(Plateau p);
  * 
- * /*public Bushi verifieObstacle(Plateau p){ this.demanderDéplacement(p); int
- * abs_deplacement =this.demanderDéplacement(p).getAbs(); int
- * ord_deplacement=this.demanderDéplacement(p).getOrd();
+ * /*public Bushi verifieObstacle(Plateau p){ this.demanderDï¿½placement(p); int
+ * abs_deplacement =this.demanderDï¿½placement(p).getAbs(); int
+ * ord_deplacement=this.demanderDï¿½placement(p).getOrd();
  * 
  * int abs_inter = (this.abs + abs_deplacement)/2; int ord_inter = (this.ord +
  * ord_deplacement)/2;

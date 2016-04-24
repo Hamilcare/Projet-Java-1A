@@ -1,3 +1,15 @@
+24/04/2016 VALENTIN
+===================
+Affichage : -creation d'une classe dédiée à l'affichage qui ne contient que des méthodes statiques permettant d'afficher le tableau en couleur
+	    -Creation de deux methodes affichePlateau permettant d'afficher le plateau et la liste des deplacement possibles en couleur
+
+Plateau   : -Fix du problème d'inversion des abscisses et des ordonnées des bushis ::::> fixe de nouvellePartie et d'initPlateau en majeure partie
+	    -Rework de la boucle de déplacement
+
+
+
+
+
 23/04/2016 VALENTIN
 ===================
 
