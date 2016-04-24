@@ -197,7 +197,7 @@ public class Plateau {
 		ArrayList<Bushi> jouable = new ArrayList<Bushi>();
 		Scanner sc = new Scanner(System.in);
 		Bushi choixBushiDeplace;// Contient le bushi que l'on souhaite deplace
-		Bushi choixDestination;// contient la destination choise pour le bushi
+		Bushi choixDestination;// contient la destination choisie pour le bushi
 								// deplacee
 		int choix = 0;
 
@@ -212,26 +212,28 @@ public class Plateau {
 			choix = jouable.indexOf(b) + 1;
 			System.out.println(choix + ":" + b);
 		}
-		// Le joueur choisi le bushi qu'il souhaite déplacer
+		// Le joueur choisi le bushi qu'il souhaite dÃ©placer
 		// try {
 		choix = sc.nextInt() - 1;
 
 		choixBushiDeplace = jouable.get(choix);
 
-		// Le joueur choisi la destination du Bushi qu'il souhaite d�plac�
+		// Le joueur choisi la destination du Bushi qu'il souhaite dï¿½placï¿½
 		choixDestination = choixBushiDeplace.choisirDeplacement(this);
 
 		// Verifie si le bushi deplace saute
-		// int saute = choixBushiDeplace.aSaute(choixDestination, this);
-		// System.out.println(saute);
-
+		int saute = choixBushiDeplace.aSaute(choixDestination, this);
+		System.out.println("saute = "+saute);
+		
+		System.out.println("anciennes coordonnées: ["+choixBushiDeplace.getAbs()+";"+choixBushiDeplace.getOrd()+"]");
 		// Effectuer le deplacement
-		// jouable.get(choix).effectuerDeplacement(jouable.get(choix).choisirDeplacement(this),
-		// this);
+		choixBushiDeplace.effectuerDeplacement(choixDestination,this);
+		System.out.println("nouvelles coordonnées: ["+choixBushiDeplace.getAbs()+";"+choixBushiDeplace.getOrd()+"]");
+		
 		/*
 		 * } catch (InputMismatchException e) { System.out.println(
 		 * "Saisie incorrecte"); } catch (IndexOutOfBoundsException e) {
-		 * System.out.println("Vous n'avez pas saisie un des nombres proposés");
+		 * System.out.println("Vous n'avez pas saisie un des nombres proposÃ©s");
 		 * sc.close(); return this.YOLOLOLDeplacement();
 		 * 
 		 * }
