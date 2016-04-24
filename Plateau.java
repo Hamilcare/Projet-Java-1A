@@ -35,6 +35,15 @@ public class Plateau {
 		}
 
 	}
+	
+	public int autreJoueur(){
+		if(this.joueurCourant == 0){
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
 
 	/**
 	 * Affiche en vert les déplacements possibles
