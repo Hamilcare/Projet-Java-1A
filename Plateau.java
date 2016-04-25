@@ -190,19 +190,12 @@ public class Plateau {
 		fichier.close();
 
 	}
-
-	public int YOLOLOLDeplacement() {
-		Affichage.affichePlateau(this);
-
+	
+	public ArrayList<Bushi> listerBushiJouable(){
 		ArrayList<Bushi> jouable = new ArrayList<Bushi>();
-		Scanner sc = new Scanner(System.in);
-		Bushi choixBushiDeplace;// Contient le bushi que l'on souhaite deplace
-		Bushi choixDestination;// contient la destination choise pour le bushi
-								// deplacee
 		int choix = 0;
-
-		// Presente la liste des bushis jouable du joueur
-
+		
+		
 		for (Bushi b : joueurs[joueurCourant].bushiJoueur) {
 			if (b.jouable == 0) {
 				jouable.add(b);
@@ -212,22 +205,38 @@ public class Plateau {
 			choix = jouable.indexOf(b) + 1;
 			System.out.println(choix + ":" + b);
 		}
+			return jouable;
+	}
+
+	public int YOLOLOLDeplacement() {
+		Affichage.affichePlateau(this);
+
+		
+		Scanner sc = new Scanner(System.in);
+		Bushi choixBushiDeplace;// Contient le bushi que l'on souhaite deplace
+		Bushi choixDestination;// contient la destination choise pour le bushi
+								// deplacee
+		int choix = 0;
+
+		// Presente la liste des bushis jouable du joueur
+
+		this.listerBushiJouable();
 		// Le joueur choisi le bushi qu'il souhaite déplacer
 		// try {
 		choix = sc.nextInt() - 1;
 
-		choixBushiDeplace = jouable.get(choix);
+		choixBushiDeplace = this.listerBushiJouable().get(choix);
 
 		// Le joueur choisi la destination du Bushi qu'il souhaite d�plac�
 		choixDestination = choixBushiDeplace.choisirDeplacement(this);
 
 		// Verifie si le bushi deplace saute
-		// int saute = choixBushiDeplace.aSaute(choixDestination, this);
-		// System.out.println(saute);
+		int saute = choixBushiDeplace.aSaute(choixDestination, this);
+		System.out.println("asaute= "+saute);
 
 		// Effectuer le deplacement
-		// jouable.get(choix).effectuerDeplacement(jouable.get(choix).choisirDeplacement(this),
-		// this);
+		choixBushiDeplace.effectuerDeplacement(choixDestination, this);
+		
 		/*
 		 * } catch (InputMismatchException e) { System.out.println(
 		 * "Saisie incorrecte"); } catch (IndexOutOfBoundsException e) {
