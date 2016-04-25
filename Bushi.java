@@ -100,7 +100,8 @@ public class Bushi {
 	 * @return le type de saut (alli�,ennemi,rien)(0,1,2)
 	 */
 	public int aSaute(Bushi destination, Plateau p) {
-
+		
+		
 		if ((destination.abs - this.abs <= 1 && destination.abs + this.abs >= -1)
 				&& (destination.ord - this.ord <= 1 && destination.ord + this.ord >= -1)) {
 			return 0; // verifier si la case est contigue ==> rien saut�
@@ -110,9 +111,16 @@ public class Bushi {
 			int absInter = (this.abs + destination.abs) / 2;
 			int ordInter = (this.ord + destination.ord) / 2;
 
-			if (p.joueurs[p.joueurCourant].bushiJoueur.contains(p.plateau[absInter][ordInter])) {
-				return 1; // a saute un allie
+			if (p.joueurs[p.joueurCourant].bushiJoueur.contains(p.plateau[absInter][ordInter])) { // a saute un allie
+				for(Bushi b : p.joueurs[p.joueurCourant].bushiJoueur){
+					b.jouable = -2;
+				}
+				this.jouable = 0;
+				
+				return 1; 
+				
 			} else {
+				this.jouable = -2;
 				return 2; // a saute un enemi
 			}
 		}
