@@ -190,12 +190,11 @@ public class Plateau {
 		fichier.close();
 
 	}
-	
-	public ArrayList<Bushi> listerBushiJouable(){
+
+	public ArrayList<Bushi> listerBushiJouable() {
 		ArrayList<Bushi> jouable = new ArrayList<Bushi>();
 		int choix = 0;
-		
-		
+
 		for (Bushi b : joueurs[joueurCourant].bushiJoueur) {
 			if (b.jouable == 0) {
 				jouable.add(b);
@@ -205,48 +204,60 @@ public class Plateau {
 			choix = jouable.indexOf(b) + 1;
 			System.out.println(choix + ":" + b);
 		}
-			return jouable;
+		return jouable;
 	}
 
 	public int YOLOLOLDeplacement() {
-		Affichage.affichePlateau(this);
 
-		
 		Scanner sc = new Scanner(System.in);
-		Bushi choixBushiDeplace;// Contient le bushi que l'on souhaite deplace
-		Bushi choixDestination;// contient la destination choise pour le bushi
-								// deplacee
-		int choix = 0;
 
-		// Presente la liste des bushis jouable du joueur
+		boolean saute;
 
-		this.listerBushiJouable();
-		// Le joueur choisi le bushi qu'il souhaite déplacer
-		// try {
-		choix = sc.nextInt() - 1;
+		do {
+			Affichage.affichePlateau(this);
 
-		choixBushiDeplace = this.listerBushiJouable().get(choix);
+			Bushi choixBushiDeplace;// Contient le bushi que l'on souhaite
+									// deplace
+			Bushi choixDestination;// contient la destination choise pour le
+									// bushi
+									// deplacee
+			int choix = 0;
 
-		// Le joueur choisi la destination du Bushi qu'il souhaite d�plac�
-		choixDestination = choixBushiDeplace.choisirDeplacement(this);
+			// Presente la liste des bushis jouable du joueur
 
-		// Verifie si le bushi deplace saute
-		int saute = choixBushiDeplace.aSaute(choixDestination, this);
-		System.out.println("asaute= "+saute);
+			this.listerBushiJouable();
+			// Le joueur choisi le bushi qu'il souhaite déplacer
+			// try {
+			choix = sc.nextInt() - 1;
 
-		// Effectuer le deplacement
-		choixBushiDeplace.effectuerDeplacement(choixDestination, this);
-		
-		/*
-		 * } catch (InputMismatchException e) { System.out.println(
-		 * "Saisie incorrecte"); } catch (IndexOutOfBoundsException e) {
-		 * System.out.println("Vous n'avez pas saisie un des nombres proposés");
-		 * sc.close(); return this.YOLOLOLDeplacement();
-		 * 
-		 * }
-		 * 
-		 * catch (Exception e) { System.out.println(e); }
-		 */
+			choixBushiDeplace = this.listerBushiJouable().get(choix);
+
+			// Le joueur choisi la destination du Bushi qu'il souhaite déplacé
+			choixDestination = choixBushiDeplace.choisirDeplacement(this);
+
+			// Verifie si le bushi deplace saute
+			saute = choixBushiDeplace.aSaute(choixDestination, this);
+			// System.out.println("asaute= " + saute);
+
+			// Effectuer le deplacement
+			choixBushiDeplace.effectuerDeplacement(choixDestination, this);
+
+			Affichage.affichePlateau(this);
+
+			/*
+			 * } catch (InputMismatchException e) { System.out.println(
+			 * "Saisie incorrecte"); } catch (IndexOutOfBoundsException e) {
+			 * System.out.println(
+			 * "Vous n'avez pas saisie un des nombres proposés"); sc.close();
+			 * return this.YOLOLOLDeplacement();
+			 * 
+			 * }
+			 * 
+			 * catch (Exception e) { System.out.println(e); }
+			 */
+
+		} while (saute && !(joueurs[this.autreJoueur()].aPerdu()));
+
 		sc.close();
 		return 0;
 	}
@@ -266,6 +277,10 @@ public class Plateau {
 		// System.out.println(p1.plateau[1][1]);
 		// System.out.println(p1.plateau[1][1].etat);
 
+	}
+
+	public int autreJoueur() {
+		return (joueurCourant + 1) % 2;
 	}
 
 }

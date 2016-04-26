@@ -99,11 +99,11 @@ public class Bushi {
 	 * @param p
 	 * @return le type de saut (alli�,ennemi,rien)(0,1,2)
 	 */
-	public int aSaute(Bushi destination, Plateau p) {
+	public boolean aSaute(Bushi destination, Plateau p) {
 
 		if ((destination.abs - this.abs <= 1 && destination.abs + this.abs >= -1)
 				&& (destination.ord - this.ord <= 1 && destination.ord + this.ord >= -1)) {
-			return 0; // verifier si la case est contigue ==> rien saut�
+			return false; // verifier si la case est contigue ==> rien saut�
 		}
 
 		else {
@@ -111,9 +111,9 @@ public class Bushi {
 			int ordInter = (this.ord + destination.ord) / 2;
 
 			if (p.joueurs[p.joueurCourant].bushiJoueur.contains(p.plateau[absInter][ordInter])) {
-				return 1; // a saute un allie
+				return true; // a saute un allie
 			} else {
-				return 2; // a saute un enemi
+				return true; // a saute un enemi
 			}
 		}
 
@@ -132,21 +132,19 @@ public class Bushi {
 	 */
 	public boolean reachable(int abs, int ord, Plateau p) {
 
-		// System.out.println();
-
 		boolean rep = false;
-		// On teste si la case de destination est contigue � la case de
+		// On teste si la case de destination est contigue à la case de
 		// depart
 		if ((abs >= 0 && abs < 10) && (ord >= 0 && ord < 10)) {
 			Bushi destination = p.plateau[ord][abs];
 			// System.out.println(destination);
 			if ((abs - this.abs <= 1 && abs + this.abs >= -1) && (ord - this.ord <= 1 && ord + this.ord >= -1)) {
-				// Dans ce cas il suffit de regard�e si la case est jouable
+				// Dans ce cas il suffit de regarder si la case est vide
 
 				rep = destination.etat == 0;
 			} else {
 				/*
-				 * Sinon il faut v�rifier que la case intermediaire est vide ou
+				 * Sinon il faut vérifier que la case intermediaire est vide ou
 				 * bien contient un bushi que l'on peut sauter
 				 */
 
@@ -183,21 +181,10 @@ public class Bushi {
 		// I) on met � jour les coord du Bushi deplace et la case d'arrivee
 		this.abs = destination.abs;
 		this.ord = destination.ord;
-		p.plateau[this.abs][this.ord] = this;
+		p.plateau[this.ord][this.abs] = this;
 
 		// II)On vide la case de depart
 		p.plateau[prevOrd][prevAbs] = new Bushi(prevAbs, prevOrd, 0, -2);
-
-		// III)On v�rifie si on a saute
-		switch (this.aSaute(destination, p)) {
-		case 0:
-			for (Bushi b : p.joueurs[p.joueurCourant].bushiJoueur)
-				b.jouable = -2;
-			break;
-		case 1:
-			break;
-
-		}
 
 	}
 
