@@ -211,9 +211,12 @@ public class Plateau {
 
 		Scanner sc = new Scanner(System.in);
 
-		boolean saute;
+		boolean saute = false;
+		boolean peutJouer;
 
 		do {
+
+			peutJouer = true;
 			Affichage.affichePlateau(this);
 
 			Bushi choixBushiDeplace;// Contient le bushi que l'on souhaite
@@ -225,24 +228,33 @@ public class Plateau {
 
 			// Presente la liste des bushis jouable du joueur
 
-			this.listerBushiJouable();
-			// Le joueur choisi le bushi qu'il souhaite déplacer
-			// try {
-			choix = sc.nextInt() - 1;
+			if (this.listerBushiJouable().size() != 0) {
+				// Le joueur choisi le bushi qu'il souhaite déplacer
+				// try {
+				choix = sc.nextInt() - 1;
 
-			choixBushiDeplace = this.listerBushiJouable().get(choix);
+				choixBushiDeplace = this.listerBushiJouable().get(choix);
 
-			// Le joueur choisi la destination du Bushi qu'il souhaite déplacé
-			choixDestination = choixBushiDeplace.choisirDeplacement(this);
+				// Le joueur choisi la destination du Bushi qu'il souhaite
+				// déplacé
+				choixDestination = choixBushiDeplace.choisirDeplacement(this);
 
-			// Verifie si le bushi deplace saute
-			saute = choixBushiDeplace.aSaute(choixDestination, this);
-			// System.out.println("asaute= " + saute);
+				// Verifie si le bushi deplace saute
+				saute = choixBushiDeplace.aSaute(choixDestination, this);
+				// System.out.println("asaute= " + saute);
 
-			// Effectuer le deplacement
-			choixBushiDeplace.effectuerDeplacement(choixDestination, this);
+				// Effectuer le deplacement
+				choixBushiDeplace.effectuerDeplacement(choixDestination, this);
 
-			Affichage.affichePlateau(this);
+				Affichage.affichePlateau(this);
+			}
+
+			else {
+
+				peutJouer = false;
+				System.out.println("Vous ne pouvez plus déplacer de Bushi, c'est la fin de votre tour\n");
+
+			}
 
 			/*
 			 * } catch (InputMismatchException e) { System.out.println(
@@ -256,7 +268,7 @@ public class Plateau {
 			 * catch (Exception e) { System.out.println(e); }
 			 */
 
-		} while (saute && !(joueurs[this.autreJoueur()].aPerdu()));
+		} while (saute && !(joueurs[this.autreJoueur()].aPerdu()) && peutJouer);
 
 		sc.close();
 		return 0;
@@ -265,11 +277,14 @@ public class Plateau {
 	public static void main(String args[]) {
 
 		Plateau p1 = new Plateau();
-		p1.nouvellePartie("standard.txt");
-		Affichage.affichePlateau(p1);
+		p1.nouvellePartie("demoSaut");
+		// Affichage.affichePlateau(p1);
 		// System.out.println(p1.plateau[1][0]);
 		// System.out.println(p1);
-		p1.YOLOLOLDeplacement();
+		// p1.YOLOLOLDeplacement();
+		System.out.println(p1.plateau[3][1].etat);
+		System.out.println(p1.plateau[4][1].jouable);
+
 		// p1.YOLOLOLDeplacement();
 		// p1.afficheDeplacement(p1.plateau[2][1].listerDeplacement(p1));
 		// Affichage.affichePlateau(p1, p1.plateau[1][2],

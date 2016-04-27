@@ -93,30 +93,66 @@ public class Bushi {
 	}
 
 	/**
-	 * D�termine si le bushi a saut�
+	 * Détermine si le bushi a sauté
 	 * 
 	 * @param destination
 	 * @param p
-	 * @return le type de saut (alli�,ennemi,rien)(0,1,2)
+	 * @return le type de saut (allié,ennemi,rien)(0,1,2)
 	 */
 	public boolean aSaute(Bushi destination, Plateau p) {
 
 		if ((destination.abs - this.abs <= 1 && destination.abs + this.abs >= -1)
 				&& (destination.ord - this.ord <= 1 && destination.ord + this.ord >= -1)) {
-			return false; // verifier si la case est contigue ==> rien saut�
+			return false; // verifier si la case est contigue ==> rien
+
 		}
 
 		else {
 			int absInter = (this.abs + destination.abs) / 2;
 			int ordInter = (this.ord + destination.ord) / 2;
+			Bushi inter = p.plateau[ordInter][absInter];
 
-			if (p.joueurs[p.joueurCourant].bushiJoueur.contains(p.plateau[absInter][ordInter])) {
-				return true; // a saute un allie
-			} else {
-				return true; // a saute un enemi
+			if (inter.etat == 0) {
+				return false;
+			} else { // Arrive sur une case non contigue
+
+				if (this instanceof Singe && this.reachable(absInter, ordInter,
+						p)) { /*
+								 * la return false; case // intermédiaire // est
+								 * // vide // ==> // le // singe // s'est //
+								 * déplacé // de // deux // cases // sans //
+								 * sauté // un // autre // BUshi
+								 */
+					return false;
+
+				}
+
+				else if (p.joueurs[p.joueurCourant].bushiJoueur.contains(inter)) { // a
+																					// saute
+																					// un
+																					// allie
+					for (Bushi b : p.joueurs[p.joueurCourant].bushiJoueur) {
+						b.jouable = -2;
+					}
+					this.jouable = 0;
+
+					return true;
+				} else {
+					if (!p.joueurs[p.joueurCourant].bushiJoueur.contains(inter)) { // a
+																					// saute
+																					// un
+																					// enemi
+						p.joueurs[p.joueurCourant].bushiJoueur.remove(inter);
+						p.plateau[ordInter][absInter] = new Bushi(absInter, ordInter, 0, 0);
+						for (Bushi b : p.joueurs[p.joueurCourant].bushiJoueur) {
+							b.jouable = -2;
+						}
+						return true;
+					}
+				}
 			}
 		}
-
+		return false;
 	}
 
 	// public ArrayList
@@ -152,7 +188,7 @@ public class Bushi {
 				int absInter = (this.abs + abs) / 2;
 				int ordInter = (this.ord + ord) / 2;
 
-				rep = (p.plateau[absInter][ordInter].etat >= 0 && p.plateau[absInter][ordInter].etat <= this.etat
+				rep = (p.plateau[ordInter][absInter].etat >= 0 && p.plateau[ordInter][absInter].etat <= this.etat
 						&& destination.etat == 0);
 				/*
 				 * etat==0 ::::> la case est vide etat<=1 ::::> la case est
