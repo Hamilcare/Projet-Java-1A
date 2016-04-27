@@ -36,14 +36,17 @@ public class Singe extends Bushi implements Deplacable {
 				// (this.ord + j));
 				if (this.reachable(this.abs + i, this.ord + j, p)) {
 					possible.add(p.plateau[this.ord + j][this.abs + i]);
-					// On regarde un coup plus loin
-					if (this.reachable(this.abs + 2 * i, this.ord + 2 * j, p)) {
-						possible.add(p.plateau[this.ord + 2 * j][this.abs + 2 * i]);
-					}
+				}
+
+				// On regarde un coup plus loin
+				if (this.reachable(this.abs + 2 * i, this.ord + 2 * j, p)) {
+					possible.add(p.plateau[this.ord + 2 * j][this.abs + 2 * i]);
 				}
 			}
+
 		}
 		return possible;
+
 	}
 
 	@Override

@@ -281,9 +281,15 @@ public class Plateau {
 		// Affichage.affichePlateau(p1);
 		// System.out.println(p1.plateau[1][0]);
 		// System.out.println(p1);
-		// p1.YOLOLOLDeplacement();
-		System.out.println(p1.plateau[3][1].etat);
-		System.out.println(p1.plateau[4][1].jouable);
+		p1.YOLOLOLDeplacement();
+		/*
+		 * System.out.println(p1.plateau[2][1].etat);
+		 * System.out.println(p1.plateau[3][1].etat);
+		 * System.out.println(p1.plateau[4][1].etat);
+		 * 
+		 * System.out.println(p1.plateau[2][1].reachable(1, 4, p1));
+		 * System.out.println(p1.plateau[2][1].abs);
+		 */
 
 		// p1.YOLOLOLDeplacement();
 		// p1.afficheDeplacement(p1.plateau[2][1].listerDeplacement(p1));
@@ -291,6 +297,10 @@ public class Plateau {
 		// p1.plateau[1][2].listerDeplacement(p1));
 		// System.out.println(p1.plateau[1][1]);
 		// System.out.println(p1.plateau[1][1].etat);
+		/*
+		 * for (int i = 0; i < 10; i++) { p1.YOLOLOLDeplacement();
+		 * p1.joueurCourant = (p1.joueurCourant + 1) % 2; }
+		 */
 
 	}
 
