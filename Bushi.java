@@ -190,10 +190,11 @@ public class Bushi {
 
 				rep = (p.plateau[ordInter][absInter].etat >= 0 && p.plateau[ordInter][absInter].etat <= this.etat
 						&& destination.etat == 0);
-				System.out.println("Valeur de rep : " + rep);
-				System.out.println("Valeur du 1er Test : " + (p.plateau[ordInter][absInter].etat >= 0));
-				System.out.println("Valeur du 2nd test : " + (p.plateau[ordInter][absInter].etat <= this.etat));
-				System.out.println("Valeur du 3em test : " + (destination.etat == 0));
+				
+				if(this instanceof Dragon && p.plateau[ord][abs].etat == -2 ){
+					return true;
+				}
+				
 				/*
 				 * etat==0 ::::> la case est vide etat<=1 ::::> la case est
 				 * occupee par un bushi plus petit ou de taille �quivalente
@@ -204,7 +205,6 @@ public class Bushi {
 		return rep;
 
 	}
-
 	/**
 	 * 
 	 * @param destination
