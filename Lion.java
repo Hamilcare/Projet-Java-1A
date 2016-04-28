@@ -8,6 +8,37 @@ public class Lion extends Bushi implements Deplacable {
     public Lion(int abs, int ord) {
         super(abs, ord, 2, 0);
     }
+    
+    public ArrayList<Bushi> listerDeplacement(Plateau p) {
+
+		int i;
+		int j;
+		ArrayList<Bushi> possible = new ArrayList<Bushi>();
+
+		// i & j repr�sente la valeur du d�calage par rapport aux coordonn�es
+		// courantes
+		for (i = -1; i <= 1; i++) {
+
+			for (j = 1; j >= -1; j--) {
+				// System.out.println("x= " + (this.abs + i) + " y =" +
+				// (this.ord + j));
+				if (this.reachable(this.abs + i, this.ord + j, p)) {
+					possible.add(p.plateau[this.ord + j][this.abs + i]);
+				}
+
+			}
+
+		}
+		return possible;
+
+	}
+	
+	@Override
+    public String toString() {
+
+    	return "Lion [" + (char) (this.abs + 'a') + "," + this.ord + "]";
+
+    }
 
     /*
      * public ArrayList<Bushi> Deplacement(Plateau p) {
