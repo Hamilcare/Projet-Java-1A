@@ -207,7 +207,7 @@ public class Plateau {
 		return jouable;
 	}
 
-	public int YOLOLOLDeplacement() {
+public int YOLOLOLDeplacement() {
 
 		Scanner sc = new Scanner(System.in);
 
@@ -219,7 +219,7 @@ public class Plateau {
 			peutJouer = true;
 			Affichage.affichePlateau(this);
 
-			Bushi choixBushiDeplace;// Contient le bushi que l'on souhaite
+			Bushi choixBushiDeplace = null;// Contient le bushi que l'on souhaite
 									// deplace
 			Bushi choixDestination;// contient la destination choise pour le
 									// bushi
@@ -230,11 +230,27 @@ public class Plateau {
 
 			if (this.listerBushiJouable().size() != 0) {
 				// Le joueur choisi le bushi qu'il souhaite déplacer
-				// try {
-				choix = sc.nextInt() - 1;
-
-				choixBushiDeplace = this.listerBushiJouable().get(choix);
-
+				try {
+					choix = sc.nextInt() - 1;
+					//sc.close();
+					choixBushiDeplace = this.listerBushiJouable().get(choix);
+				
+				}catch(IndexOutOfBoundsException e){ // cas où le numéro entré n'est pas proposé
+					System.out.println(e+"\n");
+					System.out.println("Choix entré erroné ==> Rentrer un n° proposé \n");
+					choix = sc.nextInt() - 1;
+					choixBushiDeplace = this.listerBushiJouable().get(choix);
+					
+				}catch(InputMismatchException e2){ // cas où l'utilisateur rentre autre chose qu'un int
+					System.out.println(e2+"\n");	
+					System.out.println("Choix entré erroné ==> Rentrer un n° proposé \n");
+					System.out.println("choix ="+choix);
+					sc.nextLine();//passe à la ligne suivante "vide le buffer du scanner"
+					choix = sc.nextInt() - 1;
+					//sc.close();
+					choixBushiDeplace = this.listerBushiJouable().get(choix);
+				}
+				
 				// Le joueur choisi la destination du Bushi qu'il souhaite
 				// déplacé
 				choixDestination = choixBushiDeplace.choisirDeplacement(this);
@@ -273,7 +289,7 @@ public class Plateau {
 		sc.close();
 		return 0;
 	}
-
+	
 	public static void main(String args[]) {
 
 		Plateau p1 = new Plateau();
