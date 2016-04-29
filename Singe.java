@@ -1,23 +1,35 @@
 import java.util.ArrayList;
 
 public class Singe extends Bushi implements Deplacable {
-
+	
+	
+	/**
+	 * Ce constructeur permet de creer un singe en précisant ses coordonnees, son etat (sa taille) 
+	 * et jouable (pour savoir si le lion est jouable ou non)
+	 * @param abs abscisse que l'on souhaite attribuer au singe
+	 * @param ord ordonnee que l'on souhaite attribuer au singe
+	 * @param etat etat (taille) que l'on souhaite attribuer au singe 
+	 * @param jouable precise si le singe est jouable ou non (0=jouable, 1=a saute un allie -1=a saute un ennemi
+		-2=non jouable)
+	 */
 	public Singe(int abs, int ord, int etat, int jouable) {
 		super(abs, ord, etat, jouable);
 
 	}
-
+	
+	/**
+     * Ce constructeur permet de creer un singe en précisant ses coordonnees, les autres champs sont fixes par defaut
+     * @param abs abscisse que l'on souhaite attribuer au singe
+     * @param ord ordonnee que l'on souhaite attribuer au singe
+     */
 	public Singe(int abs, int ord) {
 		super(abs, ord, 1, 0);
 	}
 
 	/**
-	 * @see Deplacable#listerDeplacement(Plateau)
-	 * @param Plateau
-	 *            le plateau de jeu
-	 * @return ArrayList<Bushi> liste des d�placement possible du bushi pass�.
-	 * 
-	 * 
+	 * listerDeplacement permet de d'ajouter les deplacements possibles d'un bushi a une arraylist
+	 * @param p le plateau de jeu
+	 * @return ArrayList<Bushi> liste des deplacement possibles de l'instance courante de singe
 	 */
 
 	@Override
@@ -48,7 +60,12 @@ public class Singe extends Bushi implements Deplacable {
 		return possible;
 
 	}
+	
 
+	/**
+	  * toString() renvoie une chaine de caracteres précisant la classe (Singe) et ses coordonnees
+	  * @return "Singe [" + (char) (this.abs + 'a') + "," + this.ord + "]"; précise la classe et l'abcisse et l'ordonnee entre crochets
+	  */
 	@Override
 	public String toString() {
 
