@@ -1,8 +1,10 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Bushi {
+public class Bushi implements Serializable {
 
+	private static final long serialVersionUID = 3656608221346934953L;
 	protected int abs;
 	protected int ord;
 	protected int etat; // 0=vide, -1= case bloqu�e, -2=case portail,
@@ -146,8 +148,9 @@ public class Bushi {
 						p.joueurs[p.joueurCourant].bushiJoueur.remove(inter);
 						p.plateau[ordInter][absInter] = new Bushi(absInter, ordInter, 0, 0);
 						for (Bushi b : p.joueurs[p.joueurCourant].bushiJoueur) {
-							b.jouable = -2;
+							b.jouable = 0;
 						}
+						this.jouable = -2;
 						return true;
 					}
 				}
@@ -169,41 +172,7 @@ public class Bushi {
 	 */
 	public boolean reachable(int abs, int ord, Plateau p) {
 
-		boolean rep = false;
-		// On teste si la case de destination est contigue à la case de
-		// depart
-		if ((abs >= 0 && abs < 10) && (ord >= 0 && ord < 10)) {
-			Bushi destination = p.plateau[ord][abs];
-			// System.out.println(destination);
-			if ((abs - this.abs <= 1 && abs + this.abs >= -1) && (ord - this.ord <= 1 && ord + this.ord >= -1)) {
-				// Dans ce cas il suffit de regarder si la case est vide
-
-				rep = destination.etat == 0;
-			} else {
-				/*
-				 * Sinon il faut vérifier que la case intermediaire est vide ou
-				 * bien contient un bushi que l'on peut sauter
-				 */
-
-				// Calcul des coordonnees de la case intermediaire
-				int absInter = (this.abs + abs) / 2;
-				int ordInter = (this.ord + ord) / 2;
-
-				rep = (p.plateau[ordInter][absInter].etat >= 0 && p.plateau[ordInter][absInter].etat <= this.etat
-						&& destination.etat == 0);
-
-				if (this instanceof Dragon && p.plateau[ord][abs] instanceof Portail) {
-					return true;
-				}
-
-				/*
-				 * etat==0 ::::> la case est vide etat<=1 ::::> la case est
-				 * occupee par un bushi plus petit ou de taille �quivalente
-				 */
-			}
-		}
-		// System.out.println("rep=" + rep);
-		return rep;
+		return (abs >= 0 && abs < 10) && (ord >= 0 && ord < 10);
 
 	}
 

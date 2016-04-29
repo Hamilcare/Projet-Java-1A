@@ -1,9 +1,17 @@
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Plateau {
+public class Plateau implements Serializable {
+
+	private static final long serialVersionUID = 2913362129474053797L;
 
 	Bushi[][] plateau = new Bushi[10][10];
 	Joueur[] joueurs = new Joueur[2];
@@ -283,6 +291,48 @@ public class Plateau {
 
 	public int autreJoueur() {
 		return (joueurCourant + 1) % 2;
+	}
+
+	public void sauvegarde() throws IOException {
+		ObjectOutputStream oos = null;
+		try {
+			File fichier = new File("partie.save");
+			oos = new ObjectOutputStream(new FileOutputStream(fichier));
+			oos.writeObject(this);
+
+			/*
+			 * this.joueurs = new Joueur[2]; this.plateau = new Bushi[10][10];
+			 * joueurCourant = 0; this.initPlateau(); joueurs[0] = new Joueur();
+			 * joueurs[1] = new Joueur();
+			 */
+
+		} catch (
+
+		IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		finally {
+			oos.close();
+		}
+	}
+
+	public Plateau charge() throws IOException {
+		Plateau p = new Plateau();
+		ObjectInputStream ois = null;
+
+		try {
+			ois = new ObjectInputStream(new FileInputStream("partie.save"));
+			p = (Plateau) ois.readObject();
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			ois.close();
+		}
+		return p;
 	}
 
 }

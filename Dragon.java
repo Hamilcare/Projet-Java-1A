@@ -46,8 +46,8 @@ public class Dragon extends Bushi implements Serializable {
 	@Override
 	public boolean reachable(int abs, int ord, Plateau p) {
 		boolean rep = super.reachable(abs, ord, p);
-		if (rep) {
-			System.out.println("La case n'est pas contigue");
+		if (rep) {// Si la case est dans le plateau
+			// System.out.println("La case n'est pas contigue");
 			Bushi destination = p.plateau[ord][abs];
 			if ((abs - this.abs <= 1 && abs + this.abs >= -1) && (ord - this.ord <= 1 && ord + this.ord >= -1)) { // Si
 																													// la

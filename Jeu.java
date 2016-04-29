@@ -49,6 +49,20 @@ public class Jeu {
 		Plateau p1 = new Plateau();
 		p1.nouvellePartie(fileName);
 
+		/*
+		 * p1.YOLOLOLDeplacement(sc);
+		 * 
+		 * try { p1.sauvegarde(); } catch (IOException e) {
+		 * System.out.println(e); }
+		 * 
+		 * try {
+		 * 
+		 * p1 = p1.charge();
+		 * 
+		 * } catch (IOException e) { System.out.println(e); }
+		 */
+		Affichage.affichePlateau(p1);
+
 		while (p1.joueurs[p1.joueurCourant].aPerdu()) {
 			p1.YOLOLOLDeplacement(sc);
 			p1.joueurCourant = p1.autreJoueur();
