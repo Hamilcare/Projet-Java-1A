@@ -190,11 +190,11 @@ public class Bushi {
 
 				rep = (p.plateau[ordInter][absInter].etat >= 0 && p.plateau[ordInter][absInter].etat <= this.etat
 						&& destination.etat == 0);
-				
-				if(this instanceof Dragon && p.plateau[ord][abs].etat == -2 ){
+
+				if (this instanceof Dragon && p.plateau[ord][abs] instanceof Portail) {
 					return true;
 				}
-				
+
 				/*
 				 * etat==0 ::::> la case est vide etat<=1 ::::> la case est
 				 * occupee par un bushi plus petit ou de taille �quivalente
@@ -205,6 +205,7 @@ public class Bushi {
 		return rep;
 
 	}
+
 	/**
 	 * 
 	 * @param destination
@@ -246,13 +247,14 @@ public class Bushi {
 
 		Affichage.affichePlateau(p, this, deplacementsPossibles);
 
+		int j = 1;// Utilisé pour l'affichage
+
 		for (i = 0; i < deplacementsPossibles.size(); i++) {
-			/*
-			 * System.out.println((i + 1) + ": [" +
-			 * deplacementsPossibles.get(i).getAbs() + "," +
-			 * deplacementsPossibles.get(i).getOrd() + "]\n");
-			 */
-			System.out.println((i + 1) + " " + deplacementsPossibles.get(i));
+
+			System.out.print((i + 1) + " " + deplacementsPossibles.get(i) + "		");
+			if (j % 6 == 0)
+				System.out.print("\n");
+			j++;
 		}
 		try {
 			choix = sc.nextInt();

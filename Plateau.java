@@ -200,10 +200,16 @@ public class Plateau {
 				jouable.add(b);
 			}
 		}
+		int i = 0;
 		for (Bushi b : jouable) {
+			i++;// Utilisé pour l'affichage
 			choix = jouable.indexOf(b) + 1;
-			System.out.println(choix + ":" + b);
+			System.out.print(choix + ":" + b + "	");
+			if (i % 4 == 0) {
+				System.out.print("\n");
+			}
 		}
+		System.out.println("\n");
 		return jouable;
 	}
 
@@ -224,16 +230,19 @@ public class Plateau {
 			Bushi choixDestination;// contient la destination choise pour le
 									// bushi
 									// deplacee
+
+			ArrayList<Bushi> listeBushiJouable = this.listerBushiJouable();
+
 			int choix = 0;
 
 			// Presente la liste des bushis jouable du joueur
 
-			if (this.listerBushiJouable().size() != 0) {
+			if (listeBushiJouable.size() != 0) {
 				// Le joueur choisi le bushi qu'il souhaite déplacer
 				// try {
 				choix = sc.nextInt() - 1;
 
-				choixBushiDeplace = this.listerBushiJouable().get(choix);
+				choixBushiDeplace = listeBushiJouable.get(choix);
 
 				// Le joueur choisi la destination du Bushi qu'il souhaite
 				// déplacé
