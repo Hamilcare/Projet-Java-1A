@@ -6,6 +6,12 @@ public class Dragon extends Bushi implements Deplacable {
 		super(abs, ord, 3, 0);
 	}
 
+	/**
+	 * listerDeplacement permet de d'ajouter les deplacements possibles d'un bushi a une arraylist
+	 * @param p le plateau de jeu 
+	 * @return possible Renvoie une ArrayList contenant les deplacements possibles de l'instance courante de Dragon
+	 */
+	
 	public ArrayList<Bushi> listerDeplacement(Plateau p) {
 
 		int i;
@@ -19,7 +25,7 @@ public class Dragon extends Bushi implements Deplacable {
 			for (j = 1; j >= -1; j--) {
 				// System.out.println("x= " + (this.abs + i) + " y =" +
 				// (this.ord + j));
-				if (p.plateau[this.ord + j][this.abs + i].etat != 0) {
+				if(p.plateau[this.ord +j][this.abs + i].etat != 0 && p.plateau[this.ord +j][this.abs + i].etat > 0){
 					if (this.reachable(this.abs + 2 * i, this.ord + 2 * j, p)) {
 						possible.add(p.plateau[this.ord + 2 * j][this.abs + 2 * i]);
 					}
