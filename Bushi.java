@@ -101,6 +101,8 @@ public class Bushi {
 	 */
 	public boolean aSaute(Bushi destination, Plateau p) {
 
+		System.out.println(this instanceof Singe);
+
 		if ((destination.abs - this.abs <= 1 && destination.abs + this.abs >= -1)
 				&& (destination.ord - this.ord <= 1 && destination.ord + this.ord >= -1)) {
 			return false; // verifier si la case est contigue ==> rien
@@ -116,13 +118,12 @@ public class Bushi {
 				return false;
 			} else { // Arrive sur une case non contigue
 
-				if (this instanceof Singe && this.reachable(absInter, ordInter,
-						p)) { /*
-								 * la return false; case // intermédiaire // est
-								 * // vide // ==> // le // singe // s'est //
-								 * déplacé // de // deux // cases // sans //
-								 * sauté // un // autre // BUshi
-								 */
+				if (this instanceof Singe && this.reachable(absInter, ordInter, p)) {
+					System.out.println("COUCOU");
+					/*
+					 * case intermédiaire est vide ==> le singe s'est déplacé de
+					 * deux cases sans sauter un autre BUshi
+					 */
 					return false;
 
 				}
@@ -238,9 +239,8 @@ public class Bushi {
 	 * @return Bushi la case de destination choisie par le joueur
 	 */
 
-	public Bushi choisirDeplacement(Plateau p) {
+	public Bushi choisirDeplacement(Plateau p, Scanner sc) {
 
-		Scanner sc = new Scanner(System.in);
 		int i;
 		int choix = 0;
 		ArrayList<Bushi> deplacementsPossibles = this.listerDeplacement(p);
@@ -258,12 +258,12 @@ public class Bushi {
 		}
 		try {
 			choix = sc.nextInt();
-			sc.close();
 
 		} catch (Exception e) {
 			System.out.println(e);
+			sc.nextLine();
 			// !!!!!!!!!!!EXPERIMENTAL!!!!!!!!!!!!!!!!
-			// return this.choisirDeplacement(p);
+			return this.choisirDeplacement(p, sc);
 		}
 		System.out.println("Choix : " + choix);
 

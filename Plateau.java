@@ -213,9 +213,7 @@ public class Plateau {
 		return jouable;
 	}
 
-	public int YOLOLOLDeplacement() {
-
-		Scanner sc = new Scanner(System.in);
+	public int YOLOLOLDeplacement(Scanner sc) {
 
 		boolean saute = false;
 		boolean peutJouer;
@@ -246,11 +244,11 @@ public class Plateau {
 
 				// Le joueur choisi la destination du Bushi qu'il souhaite
 				// déplacé
-				choixDestination = choixBushiDeplace.choisirDeplacement(this);
+				choixDestination = choixBushiDeplace.choisirDeplacement(this, sc);
 
 				// Verifie si le bushi deplace saute
 				saute = choixBushiDeplace.aSaute(choixDestination, this);
-				// System.out.println("asaute= " + saute);
+				System.out.println("asaute= " + saute);
 
 				// Effectuer le deplacement
 				choixBushiDeplace.effectuerDeplacement(choixDestination, this);
@@ -279,8 +277,8 @@ public class Plateau {
 
 		} while (saute && !(joueurs[this.autreJoueur()].aPerdu()) && peutJouer);
 
-		sc.close();
 		return 0;
+
 	}
 
 	public int autreJoueur() {

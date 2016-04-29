@@ -1,24 +1,60 @@
+import java.util.Scanner;
 
 public class Jeu {
-	/*
-	 * 
-	 * public boolean existDragon(Joueur j){ int i;
-	 * 
-	 * for (i=0; i<j.bushiJoueur.size();i++){ if (j.bushiJoueur.get(i)
-	 * instanceof Dragon){ return true; } else { return false; } } return true;
-	 * }
-	 * 
-	 * public boolean portailPris(Joueur j, Plateau p){ int i; int temp_abs; int
-	 * temp_ord; for(i=0;i<j.bushiJoueur.size();i++){ //je parcours la liste des
-	 * bushis du joueur j if(j.bushiJoueur.get(i) instanceof Portail){ //si un
-	 * des bushis est un portail temp_abs=j.bushiJoueur.get(i).getAbs(); //je
-	 * stocke son abscisse dans temp_abs temp_ord=
-	 * j.bushiJoueur.get(i).getOrd(); // je stocke son ordonn�e dans temp_ord
-	 * if(p.plateau[temp_abs][temp_ord].etat == -1){// si la case correspondant
-	 * � ces coordonn�es est occup� (portail ==> occupe = false) return true; //
-	 * le portail est pris } else { return false; } }
-	 * 
-	 * } return false; }
-	 */
+
+	public static String choisirPartie(Scanner sc) {
+
+		int choix = 0;
+
+		System.out.println("Avec quelle configuration souhaitez vous débuter ?\n");
+		System.out.println("1 : Standard ");
+		System.out.println("2 : Demonstration saut");
+		System.out.println("3 : Demonstration ShingShang");
+
+		try {
+			choix = sc.nextInt();
+
+		}
+
+		catch (Exception e) {
+			System.out.println("Erreur de saisie");
+			sc.nextLine();
+			return choisirPartie(sc);
+		}
+
+		switch (choix) {
+		case 1:
+			return "standard";
+
+		case 2:
+			return "demoSaut";
+
+		case 3:
+			return "demoShingShang";
+
+		default:
+			break;
+
+		}
+
+		return "";
+
+	}
+
+	public static void main(String[] arg) {
+		Scanner sc = new Scanner(System.in);
+		String fileName = "";
+		fileName = choisirPartie(sc);
+
+		Plateau p1 = new Plateau();
+		p1.nouvellePartie(fileName);
+
+		while (p1.joueurs[p1.joueurCourant].aPerdu()) {
+			p1.YOLOLOLDeplacement(sc);
+			p1.joueurCourant = p1.autreJoueur();
+		}
+		sc.close();
+
+	}
 
 }
