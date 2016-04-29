@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+
 public class Affichage {
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -11,31 +12,51 @@ public class Affichage {
 	public static final String ANSI_CYAN = "\u001B[36m";
 	public static final String ANSI_WHITE = "\u001B[37m";
 
+	/**
+	 * Permet de mettre une chaine de caracteres en rouge
+	 * @return "\u001B[31m" permet de prendre "l'identifiant de la couleur" rouge
+	 */
 	public static String getRouge() {
 		return "\u001B[31m";
 	}
-
+	
+	/**
+	 * Permet de mettre une chaine de caracteres en bleu
+	 * @return "\u001B[34m" permet de prendre "l'identifiant de la couleur" bleu
+	 */
 	public static String getBleu() {
 		return "\u001B[34m";
 	}
-
+	
+	/**
+	 * Permet de mettre une chaine de caracteres en vert
+	 * @return "\u001B[32m" permet de prendre "l'identifiant de la couleur" vert
+	 */
 	public static String getVert() {
 		return "\u001B[32m";
 	}
-
+	
+	/**
+	 * Permet de mettre une chaine de caracteres en blanc
+	 * @return "\u001B[37m" permet de prendre "l'identifiant de la couleur" balnc
+	 */
 	public static String getBlanc() {
 		return "\u001B[37m";
 
 	}
-
+	
+	/**
+	 * Permet de mettre une chaine de caracteres en jaune
+	 * @return "\u001B[31m" permet de prendre "l'identifiant de la couleur" jaune
+	 */
 	public static String getJaune() {
-		return "\u001B[33m";
+		return "\u001B[31m";
 	}
 
 	/**
 	 * Affiche le plateau en couleur
 	 * 
-	 * @param p
+	 * @param p le plateau de jeu
 	 */
 	public static void affichePlateau(Plateau p) {
 
@@ -109,12 +130,10 @@ public class Affichage {
 	}
 
 	/**
-	 * 
-	 * @param p
-	 * @param bushiBouge
-	 *            le Bushi que l'on souhaite déplacer
-	 * @param deplacement
-	 *            la liste des déplacement possibles de bushiBouge
+	 * Affiche le plateau en couleur dans la situation d'un bushi selectionne avec ses deplacements possibles en couleur
+	 * @param p le plateau de jeu
+	 * @param bushiBouge le Bushi que l'on souhaite déplacer      
+	 * @param deplacement la liste des déplacement possibles de bushiBouge
 	 */
 
 	public static void affichePlateau(Plateau p, Bushi bushiBouge, ArrayList<Bushi> deplacements) {
