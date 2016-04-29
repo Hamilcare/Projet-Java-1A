@@ -11,9 +11,14 @@ public class Lion extends Bushi implements Deplacable {
 		super(abs, ord, 2, 0);
 	}
 
-	public ArrayList<Bushi> listerDeplacement(Plateau p) {
+	/**
+	 * listerDeplacement permet de d'ajouter les deplacements possibles d'un bushi a une arraylist
+	 * @param p le plateau de jeu 
+	 * @return possible Renvoie une ArrayList contenant les deplacements possibles de l'instance courante de Lion
+	 */
+    public ArrayList<Bushi> listerDeplacement(Plateau p) {
 
-		int i;
+    	int i;
 		int j;
 		ArrayList<Bushi> possible = new ArrayList<Bushi>();
 
@@ -28,10 +33,15 @@ public class Lion extends Bushi implements Deplacable {
 					possible.add(p.plateau[this.ord + j][this.abs + i]);
 				}
 
+				// On regarde un coup plus loin
+				if (this.reachable(this.abs + 2 * i, this.ord + 2 * j, p) && p.plateau[this.ord + j][this.abs + i].etat <= this.etat) {
+					possible.add(p.plateau[this.ord + 2 * j][this.abs + 2 * i]);
+				}
 			}
 
 		}
 		return possible;
+
 
 	}
 
