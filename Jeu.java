@@ -3,7 +3,12 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import sun.misc.Signal;
+import sun.misc.SignalHandler;
+
 public class Jeu {
+
+	static Plateau p = new Plateau();
 
 	/**
 	 * Permet au joueur de choisir la configuration des Bushis dans laquelle il
@@ -94,15 +99,35 @@ public class Jeu {
 
 	}
 
-	public static void main(String[] arg) {
+	public static void main(final String[] arg) {
+
+		Signal.handle(new Signal("INT"), new SignalHandler() {
+			public void handle(Signal sig) {
+
+				try {
+					p.sauvegarde();
+					System.out.println("Partie sauvegardée\n");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.exit(0);
+				// } catch (Exception e) {
+				// System.out.println(e);
+
+				// }
+
+			}
+		});
 
 		Scanner sc = new Scanner(System.in);
 		String fileName = "";
-		Plateau p1 = new Plateau();
+		// Plateau p1 = new Plateau();
 
 		if (continuerPartie(sc)) {
 			try {
-				p1 = Plateau.charge();
+				p = Plateau.charge();
+
 			} catch (IOException e) {
 				System.out.println("Impossible de charger la partie");
 			}
@@ -111,10 +136,13 @@ public class Jeu {
 			Affichage.clearConsole();
 			fileName = choisirPartie(sc);
 
-			p1.nouvellePartie(fileName, sc);
+			p.nouvellePartie(fileName, sc);
 		}
-		while (!p1.joueurs[p1.joueurCourant].aPerdu())
-			p1.YOLOLOLDeplacement(sc);
+		Affichage.affichePlateau(p);
+		while (!p.joueurs[p.joueurCourant].aPerdu()) {
+
+			p.YOLOLOLDeplacement(sc);
+		}
 
 	}
 

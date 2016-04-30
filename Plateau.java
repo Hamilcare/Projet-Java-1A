@@ -17,7 +17,7 @@ public class Plateau implements Serializable {
 	Bushi[][] plateau = new Bushi[10][10];
 	Joueur[] joueurs = new Joueur[2];
 	int joueurCourant; // permet de connaitre le joueur qui
-						// est entrain de jouer.(0,1);
+	// est entrain de jouer.(0,1);
 
 	public Plateau() {
 		// super();
