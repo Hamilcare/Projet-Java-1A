@@ -240,6 +240,32 @@ public class Affichage {
 
 	}
 
+	public static void afficheJouer(Plateau p) {
+		String color = "";
+		if (p.joueurCourant == 0) {
+			color = getRouge();
+
+			System.out.println(color + "	       _                               __ ");
+			System.out.println(color + "	      | |                             /_ |");
+			System.out.println(color + "	      | | ___  _   _  ___ _   _ _ __   | |");
+			System.out.println(color + "	  _   | |/ _ \\| | | |/ _ \\ | | | '__|  | |");
+			System.out.println(color + "	 | |__| | (_) | |_| |  __/ |_| | |     | |");
+			System.out.println(color + "	  \\____/ \\___/ \\__,_|\\___|\\__,_|_|     |_|");
+		}
+
+		else {
+			color = getBleu();
+			System.out.println(color + "	       _                               ___  ");
+			System.out.println(color + "	      | |                             |__ \\ ");
+			System.out.println(color + "	      | | ___  _   _  ___ _   _ _ __     ) |");
+			System.out.println(color + "	  _   | |/ _ \\| | | |/ _ \\ | | | '__|   / / ");
+			System.out.println(color + "	 | |__| | (_) | |_| |  __/ |_| | |     / /_ ");
+			System.out.println(color + "	  \\____/ \\___/ \\__,_|\\___|\\__,_|_|    |____|  ");
+		}
+		color = getBlanc();
+		System.out.println(color + "\n");
+	}
+
 	/**
 	 * Simule un clear system
 	 */

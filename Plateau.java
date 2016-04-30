@@ -175,7 +175,6 @@ public class Plateau implements Serializable {
 					joueurs[intArray[3] - 1].bushiJoueur.add(new Portail(intArray[1], intArray[2]));
 
 				default:
-					System.out.println("merde");
 					break;
 				}
 
@@ -218,11 +217,15 @@ public class Plateau implements Serializable {
 				System.out.print("\n");
 			}
 		}
+		System.out.println("\n-1 : Finir votre tour\n");
 		System.out.println("\n");
 		return jouable;
 	}
 
 	public int YOLOLOLDeplacement(Scanner sc) {
+
+		Affichage.clearConsole();
+		Affichage.afficheJouer(this);
 
 		boolean saute = false;
 		boolean peutJouer;
@@ -251,6 +254,10 @@ public class Plateau implements Serializable {
 				// Le joueur choisi le bushi qu'il souhaite déplacer
 				try {
 					choix = sc.nextInt() - 1;
+
+					if (choix == -2) {
+						break;
+					}
 
 					choixBushiDeplace = listeBushiJouable.get(choix);
 				}
@@ -294,7 +301,7 @@ public class Plateau implements Serializable {
 
 				// Verifie si le bushi deplace saute
 				saute = choixBushiDeplace.aSaute(choixDestination, this);
-				// System.out.println("asaute= " + saute);
+				System.out.println("asaute= " + saute);
 
 				// Effectuer le deplacement
 				choixBushiDeplace.effectuerDeplacement(choixDestination, this);
@@ -328,6 +335,7 @@ public class Plateau implements Serializable {
 		 * de tout ses Bushi à 0.
 		 */
 		this.joueurs[joueurCourant].resetJouable();
+		this.joueurCourant = this.autreJoueur();
 
 		return 0;
 

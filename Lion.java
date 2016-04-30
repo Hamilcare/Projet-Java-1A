@@ -1,7 +1,6 @@
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Lion extends Bushi implements Serializable {
+public class Lion extends Bushi {
 
 	private static final long serialVersionUID = 8168766674021870305L;
 
@@ -121,7 +120,7 @@ public class Lion extends Bushi implements Serializable {
 					// valides ie dans le plateau
 
 			Bushi destination = p.plateau[ord][abs];
-			if ((abs - this.abs <= 1 && abs + this.abs >= -1) && (ord - this.ord <= 1 && ord + this.ord >= -1)) {
+			if ((abs - this.abs <= 1 && abs - this.abs >= -1) && (ord - this.ord <= 1 && ord - this.ord >= -1)) {
 				// Dans ce cas il suffit de regarder si la case est vide
 
 				rep = destination.etat == 0;

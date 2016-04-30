@@ -15,12 +15,14 @@ public class Jeu {
 	public static String choisirPartie(Scanner sc) {
 
 		int choix = 0;
-		String tab[] = new String[] { "standard", "demoSaut", "demoShingshang" };
+		String tab[] = new String[] { "standard", "demoSaut", "demoShingshang", "victoireDragon", "victoirePortail" };
 
 		System.out.println("Avec quelle configuration souhaitez vous débuter ?\n");
 		System.out.println("1 : Standard ");
 		System.out.println("2 : Demonstration saut");
 		System.out.println("3 : Demonstration ShingShang");
+		System.out.println("4 : Victoire dragon");
+		System.out.println("5 : Victoire portail");
 
 		try {
 			choix = sc.nextInt();
@@ -49,7 +51,8 @@ public class Jeu {
 	}
 
 	/**
-	 * Detecte si une partie précédente a été sauvegardée
+	 * Detecte si une partie précédente a été sauvegardée et si le joueur
+	 * souhaite la poursuivre
 	 * 
 	 * @param sc
 	 * @return true si le joueur souahite charger la sauvegarde
@@ -92,6 +95,7 @@ public class Jeu {
 	}
 
 	public static void main(String[] arg) {
+
 		Scanner sc = new Scanner(System.in);
 		String fileName = "";
 		Plateau p1 = new Plateau();
@@ -109,16 +113,8 @@ public class Jeu {
 
 			p1.nouvellePartie(fileName);
 		}
-
-		p1.YOLOLOLDeplacement(sc);
-
-		try {
-			p1.sauvegarde();
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-
-		sc.close();
+		while (!p1.joueurs[p1.joueurCourant].aPerdu())
+			p1.YOLOLOLDeplacement(sc);
 
 	}
 

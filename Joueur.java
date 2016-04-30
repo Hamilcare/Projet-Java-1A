@@ -102,7 +102,7 @@ public class Joueur implements Serializable {
 				nbPortail++;
 			}
 		}
-		return nbDragon >= 1 && nbPortail == 2;
+		return !(nbDragon >= 1 && nbPortail == 2);
 
 	}
 

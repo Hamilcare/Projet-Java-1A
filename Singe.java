@@ -1,7 +1,6 @@
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Singe extends Bushi implements Serializable {
+public class Singe extends Bushi {
 
 	private static final long serialVersionUID = 7845326830632531017L;
 

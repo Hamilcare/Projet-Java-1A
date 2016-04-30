@@ -104,10 +104,11 @@ public class Bushi implements Serializable {
 	 */
 	public boolean aSaute(Bushi destination, Plateau p) {
 
-		System.out.println(this instanceof Singe);
+		// System.out.println(this instanceof Singe);
 
-		if ((destination.abs - this.abs <= 1 && destination.abs + this.abs >= -1)
-				&& (destination.ord - this.ord <= 1 && destination.ord + this.ord >= -1)) {
+		if (((destination.abs - this.abs <= 1) && (destination.abs - this.abs >= -1))
+				&& ((destination.ord - this.ord <= 1) && (destination.ord - this.ord >= -1))) {
+
 			return false; // verifier si la case est contigue ==> rien
 
 		}
@@ -116,6 +117,7 @@ public class Bushi implements Serializable {
 			int absInter = (this.abs + destination.abs) / 2;
 			int ordInter = (this.ord + destination.ord) / 2;
 			Bushi inter = p.plateau[ordInter][absInter];
+			System.out.println(inter);
 
 			if (inter.etat == 0) {
 				return false;
@@ -140,16 +142,22 @@ public class Bushi implements Serializable {
 					}
 					this.jouable = 0;
 
+					// if (destination)
+
 					return true;
 				} else {
 					if (!p.joueurs[p.joueurCourant].bushiJoueur.contains(inter)) { // a
 																					// saute
 																					// un
 																					// enemi
-						p.joueurs[p.joueurCourant].bushiJoueur.remove(inter);
+						System.out.println("PORTAIL : " + (p.plateau[ordInter][absInter] instanceof Portail));
+						if (!(p.plateau[ordInter][absInter] instanceof Portail)) {
+							p.joueurs[p.autreJoueur()].bushiJoueur.remove(p.plateau[ordInter][absInter]);
+						}
 						p.plateau[ordInter][absInter] = new Bushi(absInter, ordInter, 0, 0);
 						for (Bushi b : p.joueurs[p.joueurCourant].bushiJoueur) {
-							b.jouable = 0;
+							if (!(b instanceof Portail))
+								b.jouable = 0;
 						}
 						this.jouable = -2;
 						return true;
@@ -160,13 +168,11 @@ public class Bushi implements Serializable {
 		return false;
 	}
 
-	// public ArrayList
-
 	/**
 	 * Regarde si la destination est accessible
 	 * 
 	 * @param destination
-	 *            case d'arriv�e
+	 *            case d'arrivée
 	 * @param p
 	 *            le plateau de jeu
 	 * @return boolean true si la case est atteignable
