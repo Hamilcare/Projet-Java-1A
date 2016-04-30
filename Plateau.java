@@ -163,16 +163,16 @@ public class Plateau implements Serializable {
 				// On g�n�re la liste des Bushis de chaque joueur
 				switch (intArray[0]) {
 				case 1:
-					joueurs[intArray[3] - 1].bushiJoueur.add(new Singe(intArray[1], intArray[2]));
+					joueurs[intArray[3] - 1].ajouterBushi(new Singe(intArray[1], intArray[2]));
 					break;
 				case 2:
-					joueurs[intArray[3] - 1].bushiJoueur.add(new Lion(intArray[1], intArray[2]));
+					joueurs[intArray[3] - 1].ajouterBushi((new Lion(intArray[1], intArray[2]));
 					break;
 				case 3:
-					joueurs[intArray[3] - 1].bushiJoueur.add(new Dragon(intArray[1], intArray[2]));
+					joueurs[intArray[3] - 1].ajouterBushi((new Dragon(intArray[1], intArray[2]));
 					break;
 				case -2:
-					joueurs[intArray[3] - 1].bushiJoueur.add(new Portail(intArray[1], intArray[2]));
+					joueurs[intArray[3] - 1].ajouterBushi((new Portail(intArray[1], intArray[2]));
 
 				default:
 					break;

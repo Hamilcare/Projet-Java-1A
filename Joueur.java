@@ -4,9 +4,9 @@ import java.util.ArrayList;
 public class Joueur implements Serializable {
 
 	private static final long serialVersionUID = 3493603960468269309L;
-	String nom;
+
 	// Bushi[] tab = new Bushi[12];
-	ArrayList<Bushi> bushiJoueur = new ArrayList<Bushi>();
+	private ArrayList<Bushi> bushiJoueur = new ArrayList<Bushi>();
 
 	/**
 	 * Constructeur qui instancie un joueur sans nom
@@ -25,27 +25,6 @@ public class Joueur implements Serializable {
 	 */
 	public Joueur(String nom) {
 		super();
-		this.nom = nom;
-	}
-
-	/**
-	 * Renvoie le nom d'un joueur
-	 * 
-	 * @return nom nom du joueur
-	 */
-	public String getNom() {
-
-		return nom;
-	}
-
-	/**
-	 * Permet de modifier le nom d'un joueur
-	 * 
-	 * @param nom
-	 *            Nom que l'on souhaite donner au joueur
-	 */
-	public void setNom(String nom) {
-
 		this.nom = nom;
 	}
 
@@ -92,18 +71,45 @@ public class Joueur implements Serializable {
 	 * @return true si le joueur à perdu
 	 */
 	public boolean aPerdu() {
-		int nbDragon = 0;
-		int nbPortail = 0;
+		return this.aPlusDragon() || this.aPlusPortail();
 
+	}
+
+	/**
+	 * 
+	 * @return true si le joueur n'a plus de dragon
+	 */
+	public boolean aPlusDragon() {
+		int nbDragon = 0;
 		for (Bushi b : bushiJoueur) {
 			if (b instanceof Dragon)
 				nbDragon++;
-			if (b instanceof Portail) {
-				nbPortail++;
-			}
 		}
-		return !(nbDragon >= 1 && nbPortail == 2);
 
+		boolean resul = !(nbDragon >= 1);
+		if (resul)
+			System.out.println("VICTOIRE PAR PRISE DES DEUX DRAGONS ADVERSES");
+		return resul;
+	}
+
+	/**
+	 * 
+	 * @return true si le joueur a perdu un de ses portails
+	 */
+	public boolean aPlusPortail() {
+		int nbPortail = 0;
+		for (Bushi b : bushiJoueur) {
+			if (b instanceof Portail)
+				nbPortail++;
+		}
+
+		boolean resul = !(nbPortail == 2);
+
+		if (resul) {
+			System.out.println("VICTOIRE PAR PRISE D'UN PORTAIL\n");
+		}
+
+		return resul;
 	}
 
 	public void resetJouable() {

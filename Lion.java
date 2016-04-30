@@ -18,6 +18,7 @@ public class Lion extends Bushi {
 	 *            precise si le Lion est jouable ou non (0=jouable, 1=a saute un
 	 *            allie -1=a saute un ennemi -2=non jouable)
 	 */
+
 	public Lion(int abs, int ord, int etat, int jouable) {
 		super(abs, ord, etat, jouable);
 
@@ -29,6 +30,7 @@ public class Lion extends Bushi {
 	 * 
 	 * @param abs
 	 *            abscisse que l'on souhaite attribuer au Lion
+	 * 
 	 * @param ord
 	 *            ordonnee que l'on souhaite attribuer au Lion
 	 */

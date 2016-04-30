@@ -151,10 +151,13 @@ public class Bushi implements Serializable {
 																					// un
 																					// enemi
 						System.out.println("PORTAIL : " + (p.plateau[ordInter][absInter] instanceof Portail));
-						if (!(p.plateau[ordInter][absInter] instanceof Portail)) {
+						System.out.println("PAS PORTAIL : " + !(p.plateau[ordInter][absInter] instanceof Portail));
+
+						if ((p.plateau[ordInter][absInter] instanceof Portail) == false) {
 							p.joueurs[p.autreJoueur()].bushiJoueur.remove(p.plateau[ordInter][absInter]);
+							p.plateau[ordInter][absInter] = new Bushi(absInter, ordInter, 0, 0);
 						}
-						p.plateau[ordInter][absInter] = new Bushi(absInter, ordInter, 0, 0);
+
 						for (Bushi b : p.joueurs[p.joueurCourant].bushiJoueur) {
 							if (!(b instanceof Portail))
 								b.jouable = 0;
@@ -188,7 +191,7 @@ public class Bushi implements Serializable {
 	 * @param destination
 	 *            case d'arrivee
 	 * @param p
-	 *            plateau de jeu Effectue le d�placement
+	 *            plateau de jeu Effectue le déplacement
 	 */
 
 	public void effectuerDeplacement(Bushi destination, Plateau p) {
@@ -196,7 +199,8 @@ public class Bushi implements Serializable {
 		int prevAbs = this.abs;
 		int prevOrd = this.ord;
 
-		// I) on met � jour les coord du Bushi deplace et la case d'arrivee
+		// I) on met à jour les coord du Bushi deplace et la case d'arrivee
+		p.joueurs[p.autreJoueur()].bushiJoueur.remove(p.plateau[destination.ord][destination.abs]);
 		this.abs = destination.abs;
 		this.ord = destination.ord;
 		p.plateau[this.ord][this.abs] = this;
