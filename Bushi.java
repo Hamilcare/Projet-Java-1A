@@ -132,33 +132,26 @@ public class Bushi implements Serializable {
 					return false;
 
 				}
+				/* A saute un allie */
+				else if (p.joueurs[p.joueurCourant].getBushiJoueur().contains(inter)) {
 
-				else if (p.joueurs[p.joueurCourant].bushiJoueur.contains(inter)) { // a
-																					// saute
-																					// un
-																					// allie
-					for (Bushi b : p.joueurs[p.joueurCourant].bushiJoueur) {
+					for (Bushi b : p.joueurs[p.joueurCourant].getBushiJoueur()) {
 						b.jouable = -2;
 					}
 					this.jouable = 0;
 
-					// if (destination)
-
 					return true;
 				} else {
-					if (!p.joueurs[p.joueurCourant].bushiJoueur.contains(inter)) { // a
-																					// saute
-																					// un
-																					// enemi
-						System.out.println("PORTAIL : " + (p.plateau[ordInter][absInter] instanceof Portail));
-						System.out.println("PAS PORTAIL : " + !(p.plateau[ordInter][absInter] instanceof Portail));
+
+					/* A saute un ennemi */
+					if (!p.joueurs[p.joueurCourant].getBushiJoueur().contains(inter)) {
 
 						if ((p.plateau[ordInter][absInter] instanceof Portail) == false) {
-							p.joueurs[p.autreJoueur()].bushiJoueur.remove(p.plateau[ordInter][absInter]);
+							p.joueurs[p.autreJoueur()].retirerBushi(p.plateau[ordInter][absInter]);
 							p.plateau[ordInter][absInter] = new Bushi(absInter, ordInter, 0, 0);
 						}
 
-						for (Bushi b : p.joueurs[p.joueurCourant].bushiJoueur) {
+						for (Bushi b : p.joueurs[p.joueurCourant].getBushiJoueur()) {
 							if (!(b instanceof Portail))
 								b.jouable = 0;
 						}
@@ -200,7 +193,7 @@ public class Bushi implements Serializable {
 		int prevOrd = this.ord;
 
 		// I) on met à jour les coord du Bushi deplace et la case d'arrivee
-		p.joueurs[p.autreJoueur()].bushiJoueur.remove(p.plateau[destination.ord][destination.abs]);
+		p.joueurs[p.autreJoueur()].retirerBushi(p.plateau[destination.ord][destination.abs]);
 		this.abs = destination.abs;
 		this.ord = destination.ord;
 		p.plateau[this.ord][this.abs] = this;
@@ -293,8 +286,9 @@ public class Bushi implements Serializable {
 	 * @param j
 	 * @return true si le bushi appartient au joueur passer en paramètre
 	 */
+
 	public boolean Appartient(Joueur j) {
-		return j.bushiJoueur.contains(this);
+		return j.getBushiJoueur().contains(this);
 
 	}
 

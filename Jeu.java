@@ -111,7 +111,7 @@ public class Jeu {
 			Affichage.clearConsole();
 			fileName = choisirPartie(sc);
 
-			p1.nouvellePartie(fileName);
+			p1.nouvellePartie(fileName, sc);
 		}
 		while (!p1.joueurs[p1.joueurCourant].aPerdu())
 			p1.YOLOLOLDeplacement(sc);

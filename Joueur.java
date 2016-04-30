@@ -12,20 +12,17 @@ public class Joueur implements Serializable {
 	 * Constructeur qui instancie un joueur sans nom
 	 */
 	public Joueur() {
-		nom = "";
+
 		bushiJoueur = new ArrayList<Bushi>();
 
 	}
 
 	/**
-	 * Constructeur qui instancie un joueur en precisant un nom
 	 * 
-	 * @param nom
-	 *            Nom du joueur
+	 * @return la liste des Bushi du joueur
 	 */
-	public Joueur(String nom) {
-		super();
-		this.nom = nom;
+	public ArrayList<Bushi> getBushiJoueur() {
+		return bushiJoueur;
 	}
 
 	/**
@@ -40,6 +37,15 @@ public class Joueur implements Serializable {
 	}
 
 	/**
+	 * Permet de retirer b de la liste des bushis du joueur
+	 * 
+	 * @param b
+	 */
+	public void retirerBushi(Bushi b) {
+		bushiJoueur.remove(b);
+	}
+
+	/**
 	 * Permet de parcourir la liste des bushis de l'instance courante de Joueur
 	 * 
 	 */
@@ -51,18 +57,6 @@ public class Joueur implements Serializable {
 		for (Bushi b : bushiJoueur) {
 			System.out.println(b);
 		}
-	}
-
-	/**
-	 * Renvoie une chaine de caracteres precisant la classe (Joueur) et son nom
-	 * 
-	 * @return "Joueur [nom=" + nom + "]"; Indique la classe et son nom entre
-	 *         crochets
-	 */
-	@Override
-	public String toString() {
-
-		return "Joueur [nom=" + nom + "]";
 	}
 
 	/**

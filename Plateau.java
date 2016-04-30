@@ -125,23 +125,23 @@ public class Plateau implements Serializable {
 	 *            le nom du fichier � charger
 	 */
 
-	public void nouvellePartie(String fileName) {
+	public void nouvellePartie(String fileName, Scanner sc) {
 
 		// On bloque les cases non accessibles
 		this.initPlateau();
 		this.bloquerCases();
-		Scanner fichier = new Scanner("Init Scanner");
+		// Scanner fichier = new Scanner("Init Scanner");
 
 		try {
 
-			fichier = new Scanner(new File(fileName)).useDelimiter("[\n]");
+			sc = new Scanner(new File(fileName)).useDelimiter("[\n]");
 
-			while (fichier.hasNext()) {// tant que le fichier n'est pas
-										// termine
+			while (sc.hasNext()) {// tant que le fichier n'est pas
+									// termine
 
-				String ligne = fichier.next();// contient
-												// la
-												// ligne
+				String ligne = sc.next();// contient
+											// la
+											// ligne
 				// courante de
 				// fichier fileName
 				/*
@@ -166,13 +166,13 @@ public class Plateau implements Serializable {
 					joueurs[intArray[3] - 1].ajouterBushi(new Singe(intArray[1], intArray[2]));
 					break;
 				case 2:
-					joueurs[intArray[3] - 1].ajouterBushi((new Lion(intArray[1], intArray[2]));
+					joueurs[intArray[3] - 1].ajouterBushi(new Lion(intArray[1], intArray[2]));
 					break;
 				case 3:
-					joueurs[intArray[3] - 1].ajouterBushi((new Dragon(intArray[1], intArray[2]));
+					joueurs[intArray[3] - 1].ajouterBushi(new Dragon(intArray[1], intArray[2]));
 					break;
 				case -2:
-					joueurs[intArray[3] - 1].ajouterBushi((new Portail(intArray[1], intArray[2]));
+					joueurs[intArray[3] - 1].ajouterBushi(new Portail(intArray[1], intArray[2]));
 
 				default:
 					break;
@@ -187,15 +187,15 @@ public class Plateau implements Serializable {
 		}
 
 		/* On place les bushis de chaque joueur sur le plateau */
-		for (Bushi b : joueurs[0].bushiJoueur) {
+		for (Bushi b : joueurs[0].getBushiJoueur()) {
 			plateau[b.ord][b.abs] = b;
 			// System.out.println("coucou");
 		}
-		for (Bushi b : joueurs[1].bushiJoueur) {
+		for (Bushi b : joueurs[1].getBushiJoueur()) {
 			plateau[b.ord][b.abs] = b;
 		}
 
-		fichier.close();
+		// fichier.close();
 
 	}
 
@@ -203,7 +203,7 @@ public class Plateau implements Serializable {
 		ArrayList<Bushi> jouable = new ArrayList<Bushi>();
 		int choix = 0;
 
-		for (Bushi b : joueurs[joueurCourant].bushiJoueur) {
+		for (Bushi b : joueurs[joueurCourant].getBushiJoueur()) {
 			if (b.jouable == 0) {
 				jouable.add(b);
 			}
@@ -284,6 +284,7 @@ public class Plateau implements Serializable {
 				 * Le joueur choisi la destination du Bushi qu'il souhaite
 				 * déplacer
 				 */
+				Affichage.clearConsole();
 				try {
 					choixDestination = choixBushiDeplace.choisirDeplacement(this, sc);
 				}
@@ -315,18 +316,6 @@ public class Plateau implements Serializable {
 				System.out.println("Vous ne pouvez plus déplacer de Bushi, c'est la fin de votre tour\n");
 
 			}
-
-			/*
-			 * } catch (InputMismatchException e) { System.out.println(
-			 * "Saisie incorrecte"); } catch (IndexOutOfBoundsException e) {
-			 * System.out.println(
-			 * "Vous n'avez pas saisie un des nombres proposés"); sc.close();
-			 * return this.YOLOLOLDeplacement();
-			 * 
-			 * }
-			 * 
-			 * catch (Exception e) { System.out.println(e); }
-			 */
 
 		} while (saute && !(joueurs[this.autreJoueur()].aPerdu()) && peutJouer);
 
