@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Bushi implements Serializable {
@@ -225,14 +226,20 @@ public class Bushi implements Serializable {
 				System.out.print("\n");
 			j++;
 		}
+
+		System.out.println("Si vous souhaitez changer de Bushi, entrez un nombre qui n'est pas dans la liste");
+
 		try {
 			choix = sc.nextInt();
 
-		} catch (Exception e) {
-			System.out.println(e);
-			sc.nextLine();
-			// !!!!!!!!!!!EXPERIMENTAL!!!!!!!!!!!!!!!!
+		} catch (InputMismatchException e) {
+			System.out.println("Mauvaise saisie, vous devez rentrer un nombre figurant dans la liste");
+			sc.next();
 			return this.choisirDeplacement(p, sc);
+		}
+
+		catch (IndexOutOfBoundsException e) {
+			throw e;
 		}
 		System.out.println("Choix : " + choix);
 

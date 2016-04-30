@@ -106,4 +106,11 @@ public class Joueur implements Serializable {
 
 	}
 
+	public void resetJouable() {
+		for (Bushi b : this.bushiJoueur) {
+			if (!(b instanceof Portail))
+				b.jouable = 0;
+		}
+	}
+
 }
