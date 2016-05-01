@@ -5,8 +5,18 @@ import java.util.Scanner;
 import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
+/**
+ * 
+ * 
+ * 
+ *
+ */
 public class Jeu {
 
+	/*
+	 * Il est necessaire d'avoir cet attribut en static afin de pouvoir le
+	 * serialiser dans la signal handler
+	 */
 	static Plateau p = new Plateau();
 
 	/**
@@ -36,7 +46,7 @@ public class Jeu {
 		}
 
 		catch (InputMismatchException e) {
-			System.out.println("Mauvaise saisie, vous devez rentrer un nombre figurant dans la liste\n");
+			System.out.println("Mauvaise saisie, vous devez rentrer un nombre\n");
 			sc.next();
 			return choisirPartie(sc);
 		}
@@ -86,7 +96,7 @@ public class Jeu {
 				return false;
 			}
 
-			else {
+			else {// L'utilisateur a rentré un nombre qui n'est pas 1 ou 2
 				System.out.println("Vous devez entrer 1 ou 2\n");
 				return continuerPartie(sc);
 
@@ -100,31 +110,29 @@ public class Jeu {
 
 	public static void main(final String[] arg) {
 
+		/*
+		 * Permet de lancer des instructions lorsque l'application reçois le
+		 * signal système du ctrl+c
+		 */
+
 		Signal.handle(new Signal("INT"), new SignalHandler() {
 			public void handle(Signal sig) {
 
-				// try {
-				p.sauvegarde();
+				p.sauvegarde(); // On sauvegarde la partie
 				System.out.println("Partie sauvegardée\n");
-				// } catch (IOException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
-				// }
-				System.exit(0);
-				// } catch (Exception e) {
-				// System.out.println(e);
 
-				// }
+				System.exit(0); // Et ensuite on ferme l'application
 
 			}
 		});
 
 		Scanner sc = new Scanner(System.in);
 		String fileName = "";
-		// Plateau p1 = new Plateau();
 
 		if (continuerPartie(sc)) {
-
+			/*
+			 * Si l'utilisateur souhaite charger la partie sauvegardée
+			 */
 			p = Plateau.charge();
 
 		} else {

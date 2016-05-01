@@ -8,10 +8,9 @@ public class Bushi implements Serializable {
 	private static final long serialVersionUID = 3656608221346934953L;
 	protected int abs;
 	protected int ord;
-	protected int etat; // 0=vide, -1= case bloqu�e, -2=case portail,
-						//
-	protected int jouable; // o=jouable 1=saut� un alli� -1=saut� un ennemi
-							// -2=non jouable
+	protected int etat; /* 0=vide, -1= case bloquée, -2=case portail*/
+
+	protected int jouable; /*o=jouable -2 non jouable*/
 
 	public void setEtat(int etat) {
 
@@ -26,29 +25,39 @@ public class Bushi implements Serializable {
 		this.jouable = jouable;
 	}
 
-	/*
-	 * public int getTaille() { return taille; }
+	/**
+	 * 
+	 * @return l'abscisse
 	 */
-
-	/*
-	 * public void setTaille(int taille) { this.taille = taille; }
-	 */
-
 	public int getAbs() {
 
 		return abs;
 	}
 
+	/**
+	 * 
+	 * @param abs
+	 *            l'abscisse que l'on souhaite donner
+	 */
 	public void setAbs(int abs) {
 
 		this.abs = abs;
 	}
 
+	/**
+	 * 
+	 * @return l'ordonnée
+	 */
 	public int getOrd() {
 
 		return ord;
 	}
 
+	/**
+	 * 
+	 * @param ord
+	 *            l'ord que l'on souhaite donner
+	 */
 	public void setOrd(int ord) {
 
 		this.ord = ord;
@@ -80,15 +89,6 @@ public class Bushi implements Serializable {
 	public boolean isBloque() {
 
 		if (this.etat == -2) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public boolean isPortail() {
-
-		if (this instanceof Portail) {
 			return true;
 		} else {
 			return false;
@@ -250,7 +250,6 @@ public class Bushi implements Serializable {
 
 	}
 
-	// CRADE
 	public ArrayList<Bushi> listerDeplacement(Plateau p) {
 
 		return new ArrayList<Bushi>();

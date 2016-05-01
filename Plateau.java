@@ -27,9 +27,16 @@ public class Plateau implements Serializable {
 		this.initPlateau();
 		joueurs[0] = new Joueur();
 		joueurs[1] = new Joueur();
+
+		this.initPlateau(); // Initialise toutes les cases
+		this.bloquerCases();// Bloque les cases des côtés
 	}
 
-	public void bloquerCases() { // bloque les cases sur les c�t�s du plateau
+	/**
+	 * bloque les cases non jouables sur les cotés du plateau
+	 */
+
+	public void bloquerCases() {
 
 		int i;
 
@@ -46,66 +53,30 @@ public class Plateau implements Serializable {
 	}
 
 	/**
-	 * Affiche en vert les déplacements possibles
-	 * 
-	 * @param deplacements
-	 *
-	 *            public void afficheDeplacement(ArrayList<Bushi> deplacements)
-	 *            {
-	 * 
-	 *            for (int i = 0; i < 10; i++) { for (int j = 0; j < 10; j++) {
-	 *            if (deplacements.contains(this.plateau[i][j])) {
-	 *            System.out.print("1|");
-	 * 
-	 *            } else { System.out.print(this.plateau[i][j] + "|"); }
-	 * 
-	 *            } System.out.print("\n"); }
-	 * 
-	 *            }
-	 * 
-	 *            /** Affichage utilisé pour le debug, on ne peut stocker des
-	 *            informations concernant la couleur dans une String
+	 * Affichage utilisé pour le debug, on ne peut stocker des informations
+	 * concernant la couleur dans une String
 	 */
-	public String toString() {
-
-		String s = "";
-
-		for (int i = 0; i < 10; i++) {
-			for (int j = 0; j < 10; j++) {
-				switch (this.plateau[i][j].etat) {
-				case 0:
-					s += " ";
-					break;
-				case 1:
-					s += "s";
-					break;
-				case 2:
-					s += "l";
-					break;
-				case 3:
-					s += "d";
-					break;
-				case -1:
-					s += "X";
-					break;
-				case -2:
-					s += "p";
-					break;
-
-				}
-				s += "|";
-				// s += this.plateau[i][j] + "|";
-
-			}
-			s += "\n";
-		}
-
-		return s;
-
-	}
+	/*
+	 * public String toString() {
+	 * 
+	 * String s = "";
+	 * 
+	 * for (int i = 0; i < 10; i++) { for (int j = 0; j < 10; j++) { switch
+	 * (this.plateau[i][j].etat) { case 0: s += " "; break; case 1: s += "s";
+	 * break; case 2: s += "l"; break; case 3: s += "d"; break; case -1: s +=
+	 * "X"; break; case -2: s += "p"; break;
+	 * 
+	 * } s += "|"; // s += this.plateau[i][j] + "|";
+	 * 
+	 * } s += "\n"; }
+	 * 
+	 * return s;
+	 * 
+	 * }
+	 */
 
 	/**
-	 * Initialise toutes les cases du plateau � un Bushi(0,0,0,0)
+	 * Initialise toutes les cases du plateau à un Bushi(0,0,0,0)
 	 */
 	public void initPlateau() {
 
@@ -127,40 +98,46 @@ public class Plateau implements Serializable {
 
 	public void nouvellePartie(String fileName, Scanner sc) {
 
-		// On bloque les cases non accessibles
-		this.initPlateau();
-		this.bloquerCases();
-		// Scanner fichier = new Scanner("Init Scanner");
-
 		try {
 
 			sc = new Scanner(new File(fileName)).useDelimiter("[\n]");
 
 			while (sc.hasNext()) {// tant que le fichier n'est pas
-									// termine
+										// termine
 
-				String ligne = sc.next();// contient
-											// la
-											// ligne
-				// courante de
-				// fichier fileName
+				/* contient la lignecourante de fileName */
+				String ligne = sc.next();
+
 				/*
-				 * Chaque ligne du fichier d�crit un bushi comme suit :
+				 * Chaque ligne du fichier décrit un bushi comme suit :
 				 * type,abs,ord,joueur,jouable
 				 * 
 				 */
 
+				/* On remplit un tableau de string contenant les différents item
+					* de ligne en utilisant l'espace comme séparateur
+					*/
 				String[] strArray = ligne.split(" ");
-				// System.out.println("str length : " +
-				// strArray.length);
+
 				int[] intArray = new int[strArray.length - 1];
 
+				/*
+				 * On cast ces strings en Integer et on les stocke dans un autre
+				 * tableau
+				 */
 				for (int i = 0; i < strArray.length - 1; i++) {
 					intArray[i] = Integer.parseInt(strArray[i]);
-					// System.out.println(intArray[i]);
+
 				}
 
-				// On g�n�re la liste des Bushis de chaque joueur
+				/*
+				 * On génére la liste des Bushis de chaque joueur 
+				 * [0] :::> type (singe, lion ect...) 
+				 * [1] :::> abscisse 
+				 * [2] :::> ordonnée 
+				 * [3] :::> joueur auquel le bushi appartient
+				 *
+				 */
 				switch (intArray[0]) {
 				case 1:
 					joueurs[intArray[3] - 1].ajouterBushi(new Singe(intArray[1], intArray[2]));
@@ -199,6 +176,12 @@ public class Plateau implements Serializable {
 
 	}
 
+	/**
+	 * Parcours la liste des bushis appartenant au joueur courant et lui renvoie
+	 * tout ceux qu'il peut déplacer
+	 * 
+	 * @return ArrayList contenant les bushis que le joueur peut deplacer
+	 */
 	public ArrayList<Bushi> listerBushiJouable() {
 		ArrayList<Bushi> jouable = new ArrayList<Bushi>();
 		int choix = 0;
@@ -221,6 +204,14 @@ public class Plateau implements Serializable {
 		System.out.println("\n");
 		return jouable;
 	}
+
+	/**
+	 * Gère la tour complet d'un joueur
+	 * 
+	 * 
+	 * @param sc
+	 * @return 0 si tout s'est bien passé
+	 */
 
 	public int YOLOLOLDeplacement(Scanner sc) {
 
@@ -330,27 +321,30 @@ public class Plateau implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * @return le numéro de l'autre joueur [1:0]
+	 */
 	public int autreJoueur() {
 		return (joueurCourant + 1) % 2;
 	}
 
+	/**
+	 * Serialise le plateau et tout ses attributs et les stocke dans le fichier
+	 * partie.save
+	 */
+
 	public void sauvegarde() {
 		ObjectOutputStream oos = null;
 		try {
-			File fichier = new File("partie.save");
+			File fichier = new File("partie.save"); /* Si un fichier portant le meme nom existe deja il est écrasé*/
 			oos = new ObjectOutputStream(new FileOutputStream(fichier));
 			oos.writeObject(this);
 			oos.close();
 
-			/*
-			 * this.joueurs = new Joueur[2]; this.plateau = new Bushi[10][10];
-			 * joueurCourant = 0; this.initPlateau(); joueurs[0] = new Joueur();
-			 * joueurs[1] = new Joueur();
-			 */
-
 		} catch (IOException e) {
 
-			// TODO Auto-generated catch block
+			System.out.println("Echec lors de la sauvegarde\n");
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e);
@@ -358,6 +352,11 @@ public class Plateau implements Serializable {
 
 	}
 
+	/**
+	 * desserialise le plateau stocké dans le fichier partie.save
+	 * 
+	 * @return le plateau tel qu'il était dans la sauvegarde
+	 */
 	public static Plateau charge() {
 		Plateau p = new Plateau();
 		ObjectInputStream ois = null;
