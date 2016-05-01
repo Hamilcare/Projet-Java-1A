@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -104,13 +103,13 @@ public class Jeu {
 		Signal.handle(new Signal("INT"), new SignalHandler() {
 			public void handle(Signal sig) {
 
-				try {
-					p.sauvegarde();
-					System.out.println("Partie sauvegardée\n");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				// try {
+				p.sauvegarde();
+				System.out.println("Partie sauvegardée\n");
+				// } catch (IOException e) {
+				// TODO Auto-generated catch block
+				// e.printStackTrace();
+				// }
 				System.exit(0);
 				// } catch (Exception e) {
 				// System.out.println(e);
@@ -125,12 +124,8 @@ public class Jeu {
 		// Plateau p1 = new Plateau();
 
 		if (continuerPartie(sc)) {
-			try {
-				p = Plateau.charge();
 
-			} catch (IOException e) {
-				System.out.println("Impossible de charger la partie");
-			}
+			p = Plateau.charge();
 
 		} else {
 			Affichage.clearConsole();

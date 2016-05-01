@@ -91,19 +91,6 @@ public class Lion extends Bushi {
 
 	}
 
-	/*
-	 * public ArrayList<Bushi> Deplacement(Plateau p) {
-	 * 
-	 * int i; int j; ArrayList<Bushi> possible = new ArrayList<Bushi>(); for (i
-	 * = this.getAbs() - 1; i <= this.getAbs() + 1; i++) {
-	 * 
-	 * for (j = this.getOrd() - 1; j <= this.getOrd() + 1; j++) {
-	 * 
-	 * if((i >= 0 && i < 10) && (j>=0 && j<10)){ if
-	 * (this.reachable(p.plateau[i][j], p)) { possible.add(p.plateau[i][j]); } }
-	 * } } return possible; }
-	 */
-
 	/**
 	 * Regarde si la destination est accessible
 	 * 
@@ -151,29 +138,3 @@ public class Lion extends Bushi {
 	}
 
 }
-/*
- * boolean rep = false; // On teste si la case de destination est contigue à la
- * case de // depart if ((abs >= 0 && abs < 10) && (ord >= 0 && ord < 10)) {
- * Bushi destination = p.plateau[ord][abs]; // System.out.println(destination);
- * if ((abs - this.abs <= 1 && abs + this.abs >= -1) && (ord - this.ord <= 1 &&
- * ord + this.ord >= -1)) { // Dans ce cas il suffit de regarder si la case est
- * vide
- * 
- * rep = destination.etat == 0; } else { /* Sinon il faut vérifier que la case
- * intermediaire est vide ou bien contient un bushi que l'on peut sauter
- */
-/*
- * // Calcul des coordonnees de la case intermediaire int absInter = (this.abs +
- * abs) / 2; int ordInter = (this.ord + ord) / 2;
- * 
- * rep = (p.plateau[ordInter][absInter].etat >= 0 &&
- * p.plateau[ordInter][absInter].etat <= this.etat && destination.etat == 0);
- * 
- * if (this instanceof Dragon && p.plateau[ord][abs] instanceof Portail) {
- * return true; }
- * 
- * /* etat==0 ::::> la case est vide etat<=1 ::::> la case est occupee par un
- * bushi plus petit ou de taille �quivalente
- * 
- * } }
- */

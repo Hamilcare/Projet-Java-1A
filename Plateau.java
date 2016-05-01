@@ -263,7 +263,7 @@ public class Plateau implements Serializable {
 				}
 
 				catch (InputMismatchException e) {
-					System.out.println("Mauvaise saisie, vous devez rentrer un nombre figurant dans la liste");
+					System.out.println("Mauvaise saisie, vous devez rentrer un nombre !");
 					sc.next();
 					return this.YOLOLOLDeplacement(sc);
 				}
@@ -334,12 +334,13 @@ public class Plateau implements Serializable {
 		return (joueurCourant + 1) % 2;
 	}
 
-	public void sauvegarde() throws IOException {
+	public void sauvegarde() {
 		ObjectOutputStream oos = null;
 		try {
 			File fichier = new File("partie.save");
 			oos = new ObjectOutputStream(new FileOutputStream(fichier));
 			oos.writeObject(this);
+			oos.close();
 
 			/*
 			 * this.joueurs = new Joueur[2]; this.plateau = new Bushi[10][10];
@@ -355,22 +356,18 @@ public class Plateau implements Serializable {
 			System.out.println(e);
 		}
 
-		finally {
-			oos.close();
-		}
 	}
 
-	public static Plateau charge() throws IOException {
+	public static Plateau charge() {
 		Plateau p = new Plateau();
 		ObjectInputStream ois = null;
 
 		try {
 			ois = new ObjectInputStream(new FileInputStream("partie.save"));
 			p = (Plateau) ois.readObject();
+			ois.close();
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
-			ois.close();
 		}
 		return p;
 	}
