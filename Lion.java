@@ -1,5 +1,12 @@
 import java.util.ArrayList;
 
+/**
+ * 
+ * Contient les methodes propores au deplacement du Lion
+ * 
+ * @see Bushi
+ *
+ */
 public class Lion extends Bushi {
 
 	private static final long serialVersionUID = 8168766674021870305L;
@@ -53,7 +60,7 @@ public class Lion extends Bushi {
 		int j;
 		ArrayList<Bushi> possible = new ArrayList<Bushi>();
 
-		// i & j repr�sente la valeur du d�calage par rapport aux coordonn�es
+		// i & j represente la valeur du decalage par rapport aux coordonnees
 		// courantes
 		for (i = -1; i <= 1; i++) {
 
@@ -64,7 +71,7 @@ public class Lion extends Bushi {
 					possible.add(p.plateau[this.ord + j][this.abs + i]);
 				}
 
-				// On regarde un coup plus loin si la case intermédiare est
+				// On regarde un coup plus loin si la case intermediare est
 				// occupée
 				if (this.reachable(this.abs + 2 * i, this.ord + 2 * j, p)
 						&& p.plateau[this.ord + j][this.abs + i].etat <= this.etat) {
@@ -106,7 +113,7 @@ public class Lion extends Bushi {
 		boolean rep = super.reachable(abs, ord, p);
 
 		if (rep) {// Regarde si les coordonnées sont
-					// valides ie dans le plateau
+						// valides ie dans le plateau
 
 			Bushi destination = p.plateau[ord][abs];
 			if ((abs - this.abs <= 1 && abs - this.abs >= -1) && (ord - this.ord <= 1 && ord - this.ord >= -1)) {

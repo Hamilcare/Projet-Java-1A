@@ -10,13 +10,21 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Represente le jeu dans son ensemble Possede un tableau 2D de bushi en guise
+ * de plateau Possede un tableau de joueur de taille 2 contenant les 2 joueurs
+ * de la partie Possede un attribut joueurCourant de type int contenant le
+ * numero du joueur courant [0:1] Implemente l'interface Serializable afin
+ * d'etre serialiser lors de la sauvegarde de la partie
+ * 
+ */
 public class Plateau implements Serializable {
 
 	private static final long serialVersionUID = 2913362129474053797L;
 
-	Bushi[][] plateau = new Bushi[10][10];
-	Joueur[] joueurs = new Joueur[2];
-	int joueurCourant; // permet de connaitre le joueur qui
+	protected Bushi[][] plateau = new Bushi[10][10];
+	protected Joueur[] joueurs = new Joueur[2];
+	protected int joueurCourant; // permet de connaitre le joueur qui
 	// est entrain de jouer.(0,1);
 
 	public Plateau() {
@@ -213,10 +221,7 @@ public class Plateau implements Serializable {
 	 * @return 0 si tout s'est bien passé
 	 */
 
-	public int YOLOLOLDeplacement(Scanner sc) {
-
-		Affichage.clearConsole();
-		Affichage.afficheJouer(this);
+	public int deplacement(Scanner sc) {
 
 		boolean saute = false;
 		boolean peutJouer;
@@ -244,6 +249,7 @@ public class Plateau implements Serializable {
 			if (listeBushiJouable.size() != 0) {
 				// Le joueur choisi le bushi qu'il souhaite déplacer
 				try {
+					System.out.println("Choisissez le bushi que vous souhaitez deplacer\n");
 					choix = sc.nextInt() - 1;
 
 					if (choix == -2) {
@@ -256,18 +262,18 @@ public class Plateau implements Serializable {
 				catch (InputMismatchException e) {
 					System.out.println("Mauvaise saisie, vous devez rentrer un nombre !");
 					sc.next();
-					return this.YOLOLOLDeplacement(sc);
+					return this.deplacement(sc);
 				}
 
 				catch (IndexOutOfBoundsException e) {
 					System.out.println("Vous devez rentrer un nombre figurant dans la liste");
 					// sc.next();
-					return this.YOLOLOLDeplacement(sc);
+					return this.deplacement(sc);
 				}
 
 				catch (Exception e) {
 					System.out.println("Erreur inconcue rencontree lors du choix du Bushi a deplacer");
-					return this.YOLOLOLDeplacement(sc);
+					return this.deplacement(sc);
 
 				}
 
@@ -277,17 +283,18 @@ public class Plateau implements Serializable {
 				 */
 				Affichage.clearConsole();
 				try {
+					System.out.println("Selectionner votre destination \n");
 					choixDestination = choixBushiDeplace.choisirDeplacement(this, sc);
 				}
 
 				catch (IndexOutOfBoundsException e) {
 					System.out.println("Vous avez decide de changer de Bushi");
-					return this.YOLOLOLDeplacement(sc);
+					return this.deplacement(sc);
 				}
 
 				catch (Exception e) {
 					System.out.println("Erreur inconcue rencontree lors du choix de la destination");
-					return this.YOLOLOLDeplacement(sc);
+					return this.deplacement(sc);
 
 				}
 

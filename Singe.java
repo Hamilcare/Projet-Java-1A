@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ * Contient les methodes propores au deplacement du Singe
+ * 
+ * @see Bushi
+ *
+ */
 public class Singe extends Bushi {
 
 	private static final long serialVersionUID = 7845326830632531017L;

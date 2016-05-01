@@ -3,6 +3,14 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * Represente un bushi avec son abscisse, son ordonne, sa taille et sa
+ * jouabilité
+ * 
+ * 
+ * Implemente l'interface Serializable afin d'etre serialiser lors de la
+ * sauvegarde de la partie
+ */
 public class Bushi implements Serializable {
 
 	private static final long serialVersionUID = 3656608221346934953L;
@@ -100,7 +108,7 @@ public class Bushi implements Serializable {
 	 * 
 	 * @param destination
 	 * @param p
-	 * @return le type de saut (allié,ennemi,rien)(0,1,2)
+	 * @return true si le bushi a sauté
 	 */
 	public boolean aSaute(Bushi destination, Plateau p) {
 

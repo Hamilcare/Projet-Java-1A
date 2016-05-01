@@ -6,9 +6,8 @@ import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
 /**
- * 
- * 
- * 
+ * Contient la methode de main de l'application Permet de lancer le jeu avec les
+ * parametres souhaites Gere la sauvegarde au moment du ctrl+c
  *
  */
 public class Jeu {
@@ -17,7 +16,7 @@ public class Jeu {
 	 * Il est necessaire d'avoir cet attribut en static afin de pouvoir le
 	 * serialiser dans la signal handler
 	 */
-	static Plateau p = new Plateau();
+	protected static Plateau p = new Plateau();
 
 	/**
 	 * Permet au joueur de choisir la configuration des Bushis dans laquelle il
@@ -110,6 +109,8 @@ public class Jeu {
 
 	public static void main(final String[] arg) {
 
+		Affichage.nomJeu();
+
 		/*
 		 * Permet de lancer des instructions lorsque l'application reçois le
 		 * signal système du ctrl+c
@@ -136,7 +137,7 @@ public class Jeu {
 			p = Plateau.charge();
 
 		} else {
-			Affichage.clearConsole();
+
 			fileName = choisirPartie(sc);
 
 			p.nouvellePartie(fileName, sc);
@@ -144,8 +145,10 @@ public class Jeu {
 		Affichage.affichePlateau(p);
 		while (!p.joueurs[p.joueurCourant].aPerdu()) {
 
-			p.YOLOLOLDeplacement(sc);
+			p.deplacement(sc);
 		}
+
+		Affichage.afficheVictoire(p.autreJoueur());
 
 	}
 

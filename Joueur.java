@@ -1,6 +1,12 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Represente un joueur par sa liste de Bushi
+ * 
+ * Implemente l'interface Serializable afin d'etre serialiser lors de la
+ * sauvegarde de la partie
+ */
 public class Joueur implements Serializable {
 
 	private static final long serialVersionUID = 3493603960468269309L;

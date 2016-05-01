@@ -1,6 +1,12 @@
 
 public class Portail extends Bushi {
 
+	/**
+	 * Decrit un portail
+	 * 
+	 * @see Bushi
+	 */
+
 	private static final long serialVersionUID = -5918860274769389792L;
 
 	/**

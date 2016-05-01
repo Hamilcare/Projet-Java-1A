@@ -1,5 +1,12 @@
 import java.util.ArrayList;
 
+/**
+ * Contient les methodes propores aux deplacements du Dragon
+ * 
+ * @see Bushi
+ *
+ */
+
 public class Dragon extends Bushi {
 
 	private static final long serialVersionUID = -6792626011613747810L;
@@ -53,7 +60,7 @@ public class Dragon extends Bushi {
 			// System.out.println("La case n'est pas contigue");
 			Bushi destination = p.plateau[ord][abs];
 			if ((abs - this.abs <= 1 && abs - this.abs >= -1) && (ord - this.ord <= 1 && ord - this.ord >= -1)) { // Si
-																													// la
+																														// la
 																													// case
 																													// est
 																													// contigue
